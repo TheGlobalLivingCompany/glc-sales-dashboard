@@ -151,3 +151,13 @@
 - Lost an unassigned deal from the week of July 6
 - Lost the Intent account (Other cohort) from the week of July 20
 - Olle Kjellberg has no changes this week
+
+## 2026-07-25
+
+- David Ives: no changes this week
+- Olle Kjellberg added 10 new activities across Broker clients (Huspy, Metrika Real Estate, Betterhomes, IGH Real Estate Broker, Nuvello Real Estate, Homes 4 Life Real Estate, HJ Real Estate) and one Networking Event
+- Olle progressed Dejavu Properties and Knight Frank to "Send Brochure"
+- Olle rescheduled with Wasl Properties
+- Olle is qualifying opportunities with Crompton Partners (3 activities)
+- Olle moved one Betterhomes activity from "Deal progression" to "Relationship advance"
+- Olle has one Betterhomes activity in "Deal progression" stage
