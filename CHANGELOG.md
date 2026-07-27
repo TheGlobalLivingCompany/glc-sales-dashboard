@@ -161,3 +161,13 @@
 - Olle is qualifying opportunities with Crompton Partners (3 activities)
 - Olle moved one Betterhomes activity from "Deal progression" to "Relationship advance"
 - Olle has one Betterhomes activity in "Deal progression" stage
+
+## 2026-07-27
+
+- David Ives added 11 new entries across multiple clients and cohorts, including Underthedoormatt (Holiday Homes), H&H (Developer), API (Broker), Bentry Capital (Developer), Provident (Broker), and three entries for Betterhomes (Broker)
+- David Ives marked Investor - City Tower and Vogue as Rescheduled
+- David Ives marked Di Salvo Realty as Deal progression
+- David Ives marked H&H as New lead created
+- David Ives marked Sodic Properties, White & Co (two entries) as Rescheduled
+- Olle Kjellberg added three new clients: Osus Properties (Broker), Engel&Völker (Investor/End client), and The Property (Broker)
+- Olle Kjellberg pushed out timelines for Betterhomes (to 2026-07-30), Huspy (to 2026-07-30), and HJ Real Estate (to 2026-07-31)
