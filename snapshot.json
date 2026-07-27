@@ -8687,15 +8687,28 @@
         "e": "Qualify opportunity",
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2805807784",
+        "w": "2026-07-27",
+        "d": "2026-07-27",
+        "c": "TGLC",
+        "p": "Ella",
+        "co": "Other",
+        "t": "Intro / first meeting",
+        "o": "Deal progression",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
       "thisWeek": "2026-07-27",
-      "planTotal": 15,
+      "planTotal": 16,
       "planByType": [
         {
           "k": "Intro / first meeting",
-          "v": 7
+          "v": 8
         },
         {
           "k": "Existing client meeting",
@@ -8733,7 +8746,7 @@
         },
         {
           "k": "Deal progression",
-          "v": 0
+          "v": 1
         },
         {
           "k": "Proposals / Presentation",
