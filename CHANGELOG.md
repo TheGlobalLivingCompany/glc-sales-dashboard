@@ -181,3 +181,11 @@
 
 - Olle Kjellberg added one new client this week: TGLC in the Other cohort
 - David Ives has no changes this week
+
+## 2026-07-27
+
+- David Ives: no changes this week
+- Olle Kjellberg updated TGLC's cohort from Other to Developer
+- TGLC interaction type changed from initial intro meeting to internal deal meeting
+- TGLC opportunity status shifted from deal progression to qualification phase
+- TGLC's deal progression note was removed
