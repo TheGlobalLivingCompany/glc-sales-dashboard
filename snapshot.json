@@ -8674,11 +8674,24 @@
         "e": "Qualify opportunity",
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2805806108",
+        "w": "2026-07-27",
+        "d": "2026-07-28",
+        "c": "Betterhomes",
+        "p": "Adam",
+        "co": "Broker",
+        "t": "New client meeting",
+        "o": "Qualify opportunity",
+        "e": "Qualify opportunity",
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
       "thisWeek": "2026-07-27",
-      "planTotal": 14,
+      "planTotal": 15,
       "planByType": [
         {
           "k": "Intro / first meeting",
@@ -8690,7 +8703,7 @@
         },
         {
           "k": "New client meeting",
-          "v": 2
+          "v": 3
         },
         {
           "k": "Event",
@@ -8716,7 +8729,7 @@
         },
         {
           "k": "Qualify opportunity",
-          "v": 3
+          "v": 4
         },
         {
           "k": "Deal progression",
