@@ -171,3 +171,8 @@
 - David Ives marked Sodic Properties, White & Co (two entries) as Rescheduled
 - Olle Kjellberg added three new clients: Osus Properties (Broker), Engel&Völker (Investor/End client), and The Property (Broker)
 - Olle Kjellberg pushed out timelines for Betterhomes (to 2026-07-30), Huspy (to 2026-07-30), and HJ Real Estate (to 2026-07-31)
+
+## 2026-07-27
+
+- Olle Kjellberg added Betterhomes (Broker cohort) to the pipeline this week
+- David Ives has no changes this week
