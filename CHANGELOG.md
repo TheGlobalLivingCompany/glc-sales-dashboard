@@ -176,3 +176,8 @@
 
 - Olle Kjellberg added Betterhomes (Broker cohort) to the pipeline this week
 - David Ives has no changes this week
+
+## 2026-07-27
+
+- Olle Kjellberg added one new client this week: TGLC in the Other cohort
+- David Ives has no changes this week
