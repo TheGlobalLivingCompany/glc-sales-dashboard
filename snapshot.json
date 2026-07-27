@@ -8694,10 +8694,10 @@
         "d": "2026-07-27",
         "c": "TGLC",
         "p": "Ella",
-        "co": "Other",
-        "t": "Intro / first meeting",
-        "o": "Deal progression",
-        "e": "Deal progression",
+        "co": "Developer",
+        "t": "Internal deal meeting",
+        "o": "Qualify opportunity",
+        "e": null,
         "a": null,
         "n": ""
       }
@@ -8708,7 +8708,7 @@
       "planByType": [
         {
           "k": "Intro / first meeting",
-          "v": 8
+          "v": 7
         },
         {
           "k": "Existing client meeting",
@@ -8728,7 +8728,7 @@
         },
         {
           "k": "Internal deal meeting",
-          "v": 0
+          "v": 1
         }
       ],
       "expByOutcome": [
@@ -8746,7 +8746,7 @@
         },
         {
           "k": "Deal progression",
-          "v": 1
+          "v": 0
         },
         {
           "k": "Proposals / Presentation",
