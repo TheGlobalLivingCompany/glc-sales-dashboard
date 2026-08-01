@@ -189,3 +189,14 @@
 - TGLC interaction type changed from initial intro meeting to internal deal meeting
 - TGLC opportunity status shifted from deal progression to qualification phase
 - TGLC's deal progression note was removed
+
+## 2026-08-01
+
+- David Ives no changes this week
+- Olle Kjellberg added 13 new entries, bringing total from 358 to 370
+- Olle added multiple Broker cohort clients including Nuvello Real Estate, Vero, Betterhomes (multiple entries), Real Estate TBD, and PSI
+- Olle also added Developer cohort clients Aldar and Omniyat, plus Investor/End client EXP Realty
+- Olle removed TGLC (Developer cohort)
+- Olle progressed Betterhomes with a rescheduled meeting and Networking Event to qualify opportunity stage
+- Olle moved Osus Properties to Proposals/Quotes Issuance and Engel&Völker to Deal progression
+- Olle sent brochures to Huspy, Metrika Real Estate, IGH Real Estate Broker, Homes 4 Life Real Estate, and HJ Real Estate
