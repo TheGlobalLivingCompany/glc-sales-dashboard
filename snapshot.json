@@ -8490,7 +8490,7 @@
         "t": "New client meeting",
         "o": "Qualify opportunity",
         "e": "Qualify opportunity",
-        "a": null,
+        "a": "Rescheduled",
         "n": ""
       },
       {
@@ -8516,7 +8516,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8529,7 +8529,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8542,7 +8542,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8555,7 +8555,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8581,7 +8581,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8607,7 +8607,7 @@
         "t": "Site / showroom visit",
         "o": "Qualify opportunity",
         "e": "Qualify opportunity",
-        "a": null,
+        "a": "Qualify opportunity",
         "n": ""
       },
       {
@@ -8619,8 +8619,8 @@
         "co": "Other",
         "t": "Event",
         "o": "Introduce Global Living",
-        "e": null,
-        "a": null,
+        "e": "Qualify opportunity",
+        "a": "Qualify opportunity",
         "n": ""
       },
       {
@@ -8633,7 +8633,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8646,7 +8646,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Proposals / Quotes Issuance",
         "n": ""
       },
       {
@@ -8659,7 +8659,7 @@
         "t": "Existing client meeting",
         "o": "Relationship advance",
         "e": null,
-        "a": null,
+        "a": "Deal progression",
         "n": ""
       },
       {
@@ -8689,22 +8689,178 @@
         "n": ""
       },
       {
-        "id": "2805807784",
-        "w": "2026-07-27",
-        "d": "2026-07-27",
-        "c": "TGLC",
-        "p": "Ella",
+        "id": "2813157656",
+        "w": "2026-08-03",
+        "d": "2026-08-03",
+        "c": "Nuvello Real Estate",
+        "p": "Paul Hampson",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Proposals / Presentation",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813215274",
+        "w": "2026-08-03",
+        "d": "2026-08-03",
+        "c": "Vero",
+        "p": "Ben Blackwell",
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813215275",
+        "w": "2026-08-03",
+        "d": "2026-08-04",
+        "c": "Betterhomes",
+        "p": "Rohan",
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813215544",
+        "w": "2026-08-03",
+        "d": "2026-08-04",
+        "c": "Betterhomes",
+        "p": null,
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813184135",
+        "w": "2026-08-03",
+        "d": "2026-08-04",
+        "c": "Real Estate TBD",
+        "p": "Alexander Scott",
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813215545",
+        "w": "2026-08-03",
+        "d": "2026-08-05",
+        "c": "Betterhomes (AD)",
+        "p": "John Smale",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813136602",
+        "w": "2026-08-03",
+        "d": "2026-08-05",
+        "c": "Betterhomes (AD)",
+        "p": "Lauren Moran",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813184071",
+        "w": "2026-08-03",
+        "d": "2026-08-05",
+        "c": "Aldar",
+        "p": "Aarooj Mallick",
         "co": "Developer",
-        "t": "Internal deal meeting",
-        "o": "Qualify opportunity",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813197413",
+        "w": "2026-08-03",
+        "d": "2026-08-05",
+        "c": "PSI",
+        "p": "Farah Achi",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813197414",
+        "w": "2026-08-03",
+        "d": "2026-08-06",
+        "c": "AtkinsRealis",
+        "p": "Tercia Arambam",
+        "co": "Other",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813196986",
+        "w": "2026-08-03",
+        "d": "2026-08-06",
+        "c": "Omniyat",
+        "p": "Samer Damaj",
+        "co": "Developer",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813197416",
+        "w": "2026-08-03",
+        "d": "2026-08-06",
+        "c": "EXP Realty",
+        "p": "Alejandro",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": "Proposals / Quotes Issuance",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2813215546",
+        "w": "2026-08-03",
+        "d": "2026-08-07",
+        "c": null,
+        "p": null,
+        "co": null,
+        "t": null,
+        "o": null,
         "e": null,
         "a": null,
         "n": ""
       }
     ],
     "dashboard": {
-      "thisWeek": "2026-07-27",
-      "planTotal": 16,
+      "thisWeek": "2026-08-03",
+      "planTotal": 13,
       "planByType": [
         {
           "k": "Intro / first meeting",
@@ -8712,23 +8868,23 @@
         },
         {
           "k": "Existing client meeting",
-          "v": 3
+          "v": 5
         },
         {
           "k": "New client meeting",
-          "v": 3
+          "v": 0
         },
         {
           "k": "Event",
-          "v": 1
+          "v": 0
         },
         {
           "k": "Site / showroom visit",
-          "v": 1
+          "v": 0
         },
         {
           "k": "Internal deal meeting",
-          "v": 1
+          "v": 0
         }
       ],
       "expByOutcome": [
@@ -8742,7 +8898,7 @@
         },
         {
           "k": "Qualify opportunity",
-          "v": 4
+          "v": 0
         },
         {
           "k": "Deal progression",
@@ -8754,7 +8910,7 @@
         },
         {
           "k": "Proposals / Quotes Issuance",
-          "v": 0
+          "v": 1
         },
         {
           "k": "New lead created",
@@ -8769,9 +8925,9 @@
           "v": 0
         }
       ],
-      "lastWeek": "2026-07-20",
-      "lastWeekTotalActual": 7,
-      "lastWeekTotalTarget": 12,
+      "lastWeek": "2026-07-27",
+      "lastWeekTotalActual": 11,
+      "lastWeekTotalTarget": 15,
       "lastWeekOutcomes": [
         {
           "k": "Introduce Global Living",
@@ -8787,15 +8943,15 @@
         },
         {
           "k": "Qualify opportunity",
-          "t": 3,
-          "a": 3,
-          "v": 0
+          "t": 5,
+          "a": 2,
+          "v": -3
         },
         {
           "k": "Deal progression",
-          "t": 1,
+          "t": 0,
           "a": 1,
-          "v": 0
+          "v": 1
         },
         {
           "k": "Proposals / Presentation",
@@ -8805,9 +8961,9 @@
         },
         {
           "k": "Proposals / Quotes Issuance",
-          "t": 2,
-          "a": 0,
-          "v": -2
+          "t": 0,
+          "a": 1,
+          "v": 1
         },
         {
           "k": "New lead created",
@@ -8817,9 +8973,9 @@
         },
         {
           "k": "Send Brochure",
-          "t": 5,
-          "a": 2,
-          "v": -3
+          "t": 7,
+          "a": 6,
+          "v": -1
         },
         {
           "k": "Send Referral Agreement",
