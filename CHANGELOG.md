@@ -200,3 +200,11 @@
 - Olle progressed Betterhomes with a rescheduled meeting and Networking Event to qualify opportunity stage
 - Olle moved Osus Properties to Proposals/Quotes Issuance and Engel&Völker to Deal progression
 - Olle sent brochures to Huspy, Metrika Real Estate, IGH Real Estate Broker, Homes 4 Life Real Estate, and HJ Real Estate
+
+## 2026-08-03
+
+- Olle Kjellberg added cohort assignment "Holiday Homes" to Test client
+- Test client now has a new client meeting scheduled with Olle
+- Objective set for Test engagement: Introduce Global Living
+- Next step logged for Test: Send Brochure
+- David Ives no changes this week
