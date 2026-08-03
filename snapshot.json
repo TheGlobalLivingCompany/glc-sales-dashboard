@@ -8848,12 +8848,12 @@
         "id": "2813215546",
         "w": "2026-08-03",
         "d": "2026-08-07",
-        "c": null,
-        "p": null,
-        "co": null,
-        "t": null,
-        "o": null,
-        "e": null,
+        "c": "Test",
+        "p": "Test",
+        "co": "Holiday Homes",
+        "t": "New client meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
         "a": null,
         "n": ""
       }
@@ -8872,7 +8872,7 @@
         },
         {
           "k": "New client meeting",
-          "v": 0
+          "v": 1
         },
         {
           "k": "Event",
@@ -8918,7 +8918,7 @@
         },
         {
           "k": "Send Brochure",
-          "v": 7
+          "v": 8
         },
         {
           "k": "Send Referral Agreement",
