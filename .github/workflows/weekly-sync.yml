@@ -84,11 +84,9 @@ jobs:
           fi
 
       - name: Build standalone dashboard for email
-        if: steps.commit.outputs.committed == 'true'
         run: node scripts/build-standalone.js
 
       - name: Email dashboard
-        if: steps.commit.outputs.committed == 'true'
         continue-on-error: true   # an email hiccup must never fail the data sync
         uses: dawidd6/action-send-mail@v3
         with:
@@ -96,9 +94,6 @@ jobs:
           server_port: 587
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          # Recipients see "GLC Sales Dashboard" as the sender name. The address
-          # underneath is still the Gmail relay — this is a display name only,
-          # not a spoofed domain (which would fail SPF/DKIM and get junked).
           from: GLC Sales Dashboard <${{ secrets.MAIL_USERNAME }}>
           to: ${{ secrets.MAIL_TO }}
           subject: "GLC Sales Dashboard — weekly update"
@@ -109,5 +104,5 @@ jobs:
 
             The full dashboard is attached — just open the file in any browser.
 
-            (This email is sent automatically by the weekly sync, only when the data has actually changed.)
+            (This email is sent automatically by the weekly sync.)
           attachments: GLC-Sales-Dashboard.html
