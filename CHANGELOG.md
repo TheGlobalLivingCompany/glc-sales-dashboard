@@ -208,3 +208,9 @@
 - Objective set for Test engagement: Introduce Global Living
 - Next step logged for Test: Send Brochure
 - David Ives no changes this week
+
+## 2026-08-03
+
+- Olle Kjellberg added three entries for the week of August 3rd: two Broker cohort clients (Betterhomes and FÄM Real Estate) and one Betterhomes entry without a cohort assignment
+- Olle Kjellberg removed a Test entry from the Holiday Homes cohort for the same week
+- David Ives has no changes this week
