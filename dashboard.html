@@ -433,7 +433,7 @@ function maxWeek(){
 }
 function periodCut(){
   const mw = maxWeek(); if(!mw) return null;
-  const map = {'4w':4,'8w':8,'12w':12};
+  const map = {'1w':1,'4w':4,'8w':8,'12w':12};
   if(!map[state.period]) return null;
   const c = new Date(mw); c.setDate(c.getDate()-7*(map[state.period]-1)); return c;
 }
@@ -545,6 +545,7 @@ function renderPersonStrip(){
   }).join('') + `
     <div class="period-wrap"><span class="lbl">Period</span>
       <div class="seg" id="periodSeg">
+        <button data-pe="1w" class="${state.period==='1w'?'on':''}">1 wk</button>
         <button data-pe="4w" class="${state.period==='4w'?'on':''}">4 wk</button>
         <button data-pe="8w" class="${state.period==='8w'?'on':''}">8 wk</button>
         <button data-pe="12w" class="${state.period==='12w'?'on':''}">12 wk</button>
@@ -559,7 +560,7 @@ function renderMeta(){
   const dates=recs.map(r=>parseD(r.d)).filter(Boolean).sort((a,b)=>a-b);
   const fmt=d=>d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
   const win = '19 Jan 2026 – ' + TRACK_TO_LABEL;
-  const pl = {'4w':'Last 4 weeks','8w':'Last 8 weeks','12w':'Last 12 weeks','all':'Full tracked period'}[state.period];
+  const pl = {'1w':'Last week','4w':'Last 4 weeks','8w':'Last 8 weeks','12w':'Last 12 weeks','all':'Full tracked period'}[state.period];
   $('#meta').innerHTML=`<span class="role">${getPersonData(state.person).role}</span><span class="dot"></span>
     <span class="window">Tracking window ${win}</span><span class="dot"></span>
     <span class="window">${recs.length} meetings logged · viewing: ${pl}</span>`;
@@ -771,6 +772,7 @@ const LB_RANGES = (function(){
   const minusDays = (iso,days)=>{const d=new Date(iso+'T00:00:00Z'); d.setUTCDate(d.getUTCDate()-days); return d.toISOString().slice(0,10);};
   const ranges = [
     {id:'all', lab:`Full period (19 Jan – ${_fmtWinShort(to)})`, from:TRACK_FROM, to},
+    {id:'1w',  lab:'Last week',     from:minusDays(to,6),  to},
     {id:'4w',  lab:'Last 4 weeks',  from:minusDays(to,27), to},
     {id:'8w',  lab:'Last 8 weeks',  from:minusDays(to,55), to},
     {id:'12w', lab:'Last 12 weeks', from:minusDays(to,83), to},
