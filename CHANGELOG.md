@@ -214,3 +214,10 @@
 - Olle Kjellberg added three entries for the week of August 3rd: two Broker cohort clients (Betterhomes and FÄM Real Estate) and one Betterhomes entry without a cohort assignment
 - Olle Kjellberg removed a Test entry from the Holiday Homes cohort for the same week
 - David Ives has no changes this week
+
+## 2026-08-05
+
+- David Ives no changes this week
+- Olle Kjellberg added H&H (Broker cohort) and removed Betterhomes
+- Olle sent brochures to Vero, Betterhomes (2 separate entries), and Real Estate TBD
+- Olle rescheduled meetings with Betterhomes (AD, 2 entries), Aldar, and PSI
