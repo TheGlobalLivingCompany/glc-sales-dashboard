@@ -8711,7 +8711,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8724,7 +8724,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8737,7 +8737,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8750,7 +8750,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -8763,7 +8763,7 @@
         "t": "Existing client meeting",
         "o": "Relationship advance",
         "e": null,
-        "a": null,
+        "a": "Rescheduled",
         "n": ""
       },
       {
@@ -8776,7 +8776,7 @@
         "t": "Existing client meeting",
         "o": "Relationship advance",
         "e": null,
-        "a": null,
+        "a": "Rescheduled",
         "n": ""
       },
       {
@@ -8789,7 +8789,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Rescheduled",
         "n": ""
       },
       {
@@ -8802,7 +8802,7 @@
         "t": "Existing client meeting",
         "o": "Relationship advance",
         "e": null,
-        "a": null,
+        "a": "Rescheduled",
         "n": ""
       },
       {
@@ -8871,15 +8871,15 @@
         "n": ""
       },
       {
-        "id": "2816130562",
+        "id": "2819001440",
         "w": "2026-08-03",
-        "d": "2026-08-04",
-        "c": "Betterhomes",
-        "p": "City Tower",
-        "co": null,
-        "t": null,
-        "o": null,
-        "e": null,
+        "d": "2026-08-05",
+        "c": "H&H",
+        "p": "Sahali Saleem",
+        "co": "Broker",
+        "t": "New client meeting",
+        "o": "Qualify opportunity",
+        "e": "Qualify opportunity",
         "a": null,
         "n": ""
       }
@@ -8898,7 +8898,7 @@
         },
         {
           "k": "New client meeting",
-          "v": 0
+          "v": 1
         },
         {
           "k": "Event",
@@ -8924,7 +8924,7 @@
         },
         {
           "k": "Qualify opportunity",
-          "v": 0
+          "v": 1
         },
         {
           "k": "Deal progression",
