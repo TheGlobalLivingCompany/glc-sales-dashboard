@@ -221,3 +221,9 @@
 - Olle Kjellberg added H&H (Broker cohort) and removed Betterhomes
 - Olle sent brochures to Vero, Betterhomes (2 separate entries), and Real Estate TBD
 - Olle rescheduled meetings with Betterhomes (AD, 2 entries), Aldar, and PSI
+
+## 2026-08-09
+
+- David Ives: no changes this week
+- Olle Kjellberg added 10 new entries across multiple clients, bringing total from 372 to 382
+- New activity includes 6 entries for Betterhomes (Broker cohort), 2 for H&H (one Investor/End client, one Developer), and single entries for Metropolitan Premium Properties (Broker) and IGH Real Estate (Broker)
