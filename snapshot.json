@@ -8882,23 +8882,153 @@
         "e": "Qualify opportunity",
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2823632924",
+        "w": "2026-08-03",
+        "d": "2026-08-03",
+        "c": "Metropolitan Premium Properties",
+        "p": "Constantino",
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823722788",
+        "w": "2026-08-03",
+        "d": "2026-08-03",
+        "c": "H&H",
+        "p": "Shiva",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823737359",
+        "w": "2026-08-03",
+        "d": "2026-08-04",
+        "c": "Betterhomes",
+        "p": "Josh Conlon",
+        "co": "Broker",
+        "t": "New client meeting",
+        "o": "Relationship advance",
+        "e": "Qualify opportunity",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823722789",
+        "w": "2026-08-03",
+        "d": "2026-08-04",
+        "c": "Betterhomes",
+        "p": "Sena",
+        "co": "Broker",
+        "t": "New client meeting",
+        "o": "Relationship advance",
+        "e": "Qualify opportunity",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823713145",
+        "w": "2026-08-03",
+        "d": "2026-08-04",
+        "c": "H&H",
+        "p": "City Tower",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823633176",
+        "w": "2026-08-03",
+        "d": "2026-08-05",
+        "c": "Betterhomes",
+        "p": "Sana",
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823795141",
+        "w": "2026-08-03",
+        "d": "2026-08-05",
+        "c": "Betterhomes",
+        "p": "Toni Jaoude",
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823633046",
+        "w": "2026-08-03",
+        "d": "2026-08-06",
+        "c": "Betterhomes",
+        "p": "Olly Banks",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Qualify opportunity",
+        "e": "Qualify opportunity",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823633047",
+        "w": "2026-08-03",
+        "d": "2026-08-05",
+        "c": "IGH Real Estate",
+        "p": "Milos Kovacevic",
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2823756121",
+        "w": "2026-08-03",
+        "d": "2026-08-07",
+        "c": "Betterhomes",
+        "p": "Noemi Simon",
+        "co": "Broker",
+        "t": "Intro / first meeting",
+        "o": "Proposals / Presentation",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
       "thisWeek": "2026-08-03",
-      "planTotal": 15,
+      "planTotal": 25,
       "planByType": [
         {
           "k": "Intro / first meeting",
-          "v": 8
+          "v": 13
         },
         {
           "k": "Existing client meeting",
-          "v": 6
+          "v": 9
         },
         {
           "k": "New client meeting",
-          "v": 1
+          "v": 3
         },
         {
           "k": "Event",
@@ -8924,11 +9054,11 @@
         },
         {
           "k": "Qualify opportunity",
-          "v": 1
+          "v": 4
         },
         {
           "k": "Deal progression",
-          "v": 1
+          "v": 3
         },
         {
           "k": "Proposals / Presentation",
@@ -8944,7 +9074,7 @@
         },
         {
           "k": "Send Brochure",
-          "v": 8
+          "v": 12
         },
         {
           "k": "Send Referral Agreement",
