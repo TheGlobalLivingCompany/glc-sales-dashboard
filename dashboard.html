@@ -418,7 +418,7 @@ const OWNER_COLORS = {'David Ives':'#321D1C','Olle Kjellberg':'#A06C44'};
 const OUTCOME_ORDER = ['New lead created','Send Brochure','Send Referral Agreement',
   'Qualify opportunity','Proposals / Quotes Issuance','Deal progression','Rescheduled'];
 
-const state = { person: PEOPLE[0], period: 'all', search:'', fType:'', fCohort:'', fMatch:'', dFrom:'', dTo:'', lbExpanded:null, insightExpanded:null };
+const state = { person: PEOPLE[0], period: 'all', search:'', fType:'', fCohort:'', fMatch:'', dFrom:'', dTo:'', lbExpanded:null, insightExpanded:null, clientExpanded:null, agentExpanded:null };
 
 const $ = s => document.querySelector(s);
 const fmtN = n => n.toLocaleString('en-US');
@@ -763,13 +763,48 @@ function clientStatsForCohort(recs, cohort){
     .map(c=>({...c,rate:pct(c.s,c.n)}))
     .sort((a,b)=>b.n-a.n||b.rate-a.rate);
 }
-function recurringTable(list, cap=8){
+function agentStatsForClient(recs, cohort, clientName){
+  const m={};
+  recs.forEach(r=>{
+    if(r.co!==cohort || (r.c||'').trim()!==clientName) return;
+    const key=(r.p||'').trim();
+    if(!key || ['na','n/a'].includes(key.toLowerCase())) return; // skip blank / not-applicable contact names
+    m[key]=m[key]||{name:key,n:0,s:0};
+    m[key].n++;
+    if(SUCCESS_OUTCOMES.includes(r.a)) m[key].s++;
+  });
+  return Object.values(m).map(a=>({...a,rate:pct(a.s,a.n)})).sort((a,b)=>b.s-a.s||b.n-a.n);
+}
+function agentPanelHTML(recs, cohort, clientName){
+  const agents=agentStatsForClient(recs, cohort, clientName);
+  if(!agents.length) return `<div class="drill-panel"><div class="dp-more">No individual contact names logged for this client yet.</div></div>`;
+  let g=`<div class="drill-panel"><div class="dp-row h" style="grid-template-columns:1fr 80px 120px"><span>Agent</span><span>Meetings</span><span>Proposal / Deal</span></div>`;
+  g+=agents.map(a=>{
+    const key=`${cohort}||${clientName}||${a.name}`;
+    const open=state.agentExpanded===key;
+    const row=`<div class="dp-row drill${open?' open':''}" data-agentkey="${key}" style="grid-template-columns:1fr 80px 120px">
+      <span style="font-weight:500"><span class="drill-chev">▸</span>${a.name}</span>
+      <span style="color:var(--muted)">${a.n}</span>
+      <span style="font-weight:600">${a.rate}% <span style="font-weight:400;color:var(--muted);font-size:11px">(${a.s}/${a.n})</span></span></div>`;
+    const sub=open?drillPanelHTML(recs.filter(r=>r.co===cohort && (r.c||'').trim()===clientName && (r.p||'').trim()===a.name), {cap:25, ctxKey:'agent'}):'';
+    return row+sub;
+  }).join('');
+  g+='</div>';
+  return g;
+}
+function recurringTable(list, cohort, recs, cap=8){
   if(!list.length) return `<div class="p-note" style="margin-top:8px">No recurring relationships (2+ meetings) found yet in this cohort.</div>`;
   let g=`<div class="plan-row h"><span>Client</span><span class="num">Meetings</span><span class="num">Success</span></div>`;
-  g+=list.slice(0,cap).map(c=>`<div class="plan-row">
-    <span class="nm" style="font-weight:500">${c.name}</span>
-    <span class="num" style="color:var(--muted)">${c.n}</span>
-    <span class="num" style="font-weight:600">${c.rate}% <span style="font-weight:400;color:var(--muted);font-size:11px">(${c.s}/${c.n})</span></span></div>`).join('');
+  g+=list.slice(0,cap).map(c=>{
+    const key=`${cohort}||${c.name}`;
+    const open=state.clientExpanded===key;
+    const row=`<div class="plan-row drill${open?' open':''}" data-clientkey="${key}">
+      <span class="nm" style="font-weight:500"><span class="drill-chev">▸</span>${c.name}</span>
+      <span class="num" style="color:var(--muted)">${c.n}</span>
+      <span class="num" style="font-weight:600">${c.rate}% <span style="font-weight:400;color:var(--muted);font-size:11px">(${c.s}/${c.n})</span></span></div>`;
+    const panel=open?agentPanelHTML(recs, cohort, c.name):'';
+    return row+panel;
+  }).join('');
   if(list.length>cap) g+=`<div class="p-note" style="margin-top:8px">+${list.length-cap} more recurring ${list.length-cap===1?'client':'clients'} in the meeting log.</div>`;
   return g;
 }
@@ -778,8 +813,8 @@ function renderRecurringClients(){
   if(state.person===TEAM){ row.style.display='none'; return; }
   row.style.display='';
   const recs=DATA[state.person].records;
-  $('#recurringBrokers').innerHTML=recurringTable(clientStatsForCohort(recs,'Broker'));
-  $('#recurringDevelopers').innerHTML=recurringTable(clientStatsForCohort(recs,'Developer'));
+  $('#recurringBrokers').innerHTML=recurringTable(clientStatsForCohort(recs,'Broker'),'Broker',recs);
+  $('#recurringDevelopers').innerHTML=recurringTable(clientStatsForCohort(recs,'Developer'),'Developer',recs);
 }
 
 /* ---------- successful-meeting insights ---------- */
@@ -795,15 +830,15 @@ function cohortSuccessStats(recs){
   return Object.values(m).map(o=>({...o,rate:pct(o.s,o.n)})).sort((a,b)=>b.rate-a.rate||b.n-a.n);
 }
 /* ---------- shared: drill-down meeting list for click-throughs ---------- */
-function drillPanelHTML(recs, cap=25, ctxKey=null){
+function drillPanelHTML(allRecs, {cap=25, ctxKey=null, onlySuccessful=false}={}){
   const fmt=s=>{const d=parseD(s);return d?d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}):'—';};
-  const sorted=[...recs].sort((a,b)=>(b.d||b.w||'').localeCompare(a.d||a.w||''));
+  const tableRecs = onlySuccessful ? allRecs.filter(r=>SUCCESS_OUTCOMES.includes(r.a)) : allRecs;
+  const sorted=[...tableRecs].sort((a,b)=>(b.d||b.w||'').localeCompare(a.d||a.w||''));
   if(ctxKey) _drillRecs[ctxKey]=sorted;
   const exportBtn = ctxKey ? `<a class="dp-export" data-drill-ctx="${ctxKey}" title="Export these meetings as CSV">⤓ Export CSV</a>` : '';
-  if(!sorted.length) return `<div class="drill-panel"><div class="dp-more">No meetings found for this selection.</div></div>`;
-  // compact success-rate-over-time trend, only shown when there's more than one active week to compare
+  // compact success-rate-over-time trend — always computed from the full meeting set, even when the table below is filtered
   const wk={};
-  recs.forEach(r=>{ if(!r.w) return; wk[r.w]=wk[r.w]||{meetings:0,succ:0}; wk[r.w].meetings++; if(SUCCESS_OUTCOMES.includes(r.a)) wk[r.w].succ++; });
+  allRecs.forEach(r=>{ if(!r.w) return; wk[r.w]=wk[r.w]||{meetings:0,succ:0}; wk[r.w].meetings++; if(SUCCESS_OUTCOMES.includes(r.a)) wk[r.w].succ++; });
   const wkSeries=Object.keys(wk).sort().map(w=>({w,meetings:pct(wk[w].succ,wk[w].meetings)}));
   const trend = wkSeries.length>=2
     ? `<div style="display:flex;align-items:center;gap:8px;padding:2px 4px 10px;font-size:11px;color:var(--muted)">
@@ -811,7 +846,11 @@ function drillPanelHTML(recs, cap=25, ctxKey=null){
         <span style="width:90px">${sparkline(wkSeries,90,22)}</span>
         <span>${wkSeries[0].meetings}% → ${wkSeries[wkSeries.length-1].meetings}%</span></div>`
     : '';
-  let g=`<div class="drill-panel">${trend}<div class="dp-row h"><span>Date</span><span>Client</span><span>Type</span><span>Outcome</span><span>Notes</span></div>`;
+  const filterNote = onlySuccessful
+    ? `<div class="dp-more" style="padding-top:0;padding-bottom:8px">Showing successful meetings only (Proposal issued or Deal progression), most recent first · ${sorted.length} of ${allRecs.length} total meetings</div>`
+    : '';
+  if(!sorted.length) return `<div class="drill-panel">${trend}${filterNote}<div class="dp-more">No successful meetings found for this selection yet.</div></div>`;
+  let g=`<div class="drill-panel">${trend}${filterNote}<div class="dp-row h"><span>Date</span><span>Client</span><span>Type</span><span>Outcome</span><span>Notes</span></div>`;
   g+=sorted.slice(0,cap).map(r=>{
     const succ=SUCCESS_OUTCOMES.includes(r.a);
     return `<div class="dp-row">
@@ -866,7 +905,7 @@ function renderInsights(){
       <span class="nm" title="Click to see the meetings behind this"><span class="drill-chev">▸</span>${s.k}${s.n<MIN_N?' <span style="color:var(--muted);font-size:10px">(low sample)</span>':''}</span>
       <div class="track"><div class="fill" style="width:${s.rate}%;background:${lc[s.k]||'var(--slate)'}"></div></div>
       <span class="n" title="${s.s} successful of ${s.n} meetings">${s.rate}%</span></div>`;
-    const panel=open?drillPanelHTML(recs.filter(r=>r.co===s.k),25,'insight'):'';
+    const panel=open?drillPanelHTML(recs.filter(r=>r.co===s.k), {cap:25, ctxKey:'insight'}):'';
     return bar+panel;
   }).join('')+
     `<div class="p-note" style="margin-top:8px">${stats.map(s=>`${s.k}: ${s.s}/${s.n}`).join(' · ')} — click a cohort above to see the meetings behind it.</div>`;
@@ -929,7 +968,7 @@ function renderLeaderboard(){
       <span><div class="track" style="height:9px;background:var(--paper);border-radius:6px;overflow:hidden"><div class="fill" style="height:100%;border-radius:6px;width:${r.rate}%;background:${cc}"></div></div></span>
       <span class="num" style="color:var(--muted)">${r.s}/${r.n}</span>
       <span class="num" style="font-weight:600">${r.rate}%</span></div>`;
-    const panel=open?drillPanelHTML(lbFilteredRecords(r.p).filter(x=>x.co===r.k),25,'lb'):'';
+    const panel=open?drillPanelHTML(lbFilteredRecords(r.p).filter(x=>x.co===r.k), {cap:25, ctxKey:'lb', onlySuccessful:true}):'';
     return row+panel;
   }).join('');
   $('#leaderboardGrid').innerHTML=g;
@@ -1268,7 +1307,7 @@ function renderFootnote(){
    Monday.com opportunity sync and multi-user roles.`;
 }
 
-function resetFilters(){ state.search='';state.fType='';state.fCohort='';state.fMatch='';state.dFrom='';state.dTo='';state.lbExpanded=null;state.insightExpanded=null; }
+function resetFilters(){ state.search='';state.fType='';state.fCohort='';state.fMatch='';state.dFrom='';state.dTo='';state.lbExpanded=null;state.insightExpanded=null;state.clientExpanded=null;state.agentExpanded=null; }
 
 function renderAll(){
   renderPersonStrip(); renderMeta(); renderKPIs(); renderTrend(); renderCohortTrend(); renderRecurringClients(); renderCommentary(); renderInsights(); renderCoachInsights(); renderLeaderboard(); renderForecast();
@@ -1297,6 +1336,10 @@ document.addEventListener('click',e=>{
   if(lbRow){ const k=lbRow.dataset.lbkey; state.lbExpanded=(state.lbExpanded===k)?null:k; renderLeaderboard(); return; }
   const coBar=e.target.closest('[data-cokey]');
   if(coBar){ const k=coBar.dataset.cokey; state.insightExpanded=(state.insightExpanded===k)?null:k; renderInsights(); return; }
+  const clientRow=e.target.closest('[data-clientkey]');
+  if(clientRow){ const k=clientRow.dataset.clientkey; state.clientExpanded=(state.clientExpanded===k)?null:k; state.agentExpanded=null; renderRecurringClients(); return; }
+  const agentRow=e.target.closest('[data-agentkey]');
+  if(agentRow){ const k=agentRow.dataset.agentkey; state.agentExpanded=(state.agentExpanded===k)?null:k; renderRecurringClients(); return; }
 });
 $('#themeBtn').onclick=()=>{
   const h=document.documentElement;
