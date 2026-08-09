@@ -227,3 +227,12 @@
 - David Ives: no changes this week
 - Olle Kjellberg added 10 new entries across multiple clients, bringing total from 372 to 382
 - New activity includes 6 entries for Betterhomes (Broker cohort), 2 for H&H (one Investor/End client, one Developer), and single entries for Metropolitan Premium Properties (Broker) and IGH Real Estate (Broker)
+
+## 2026-08-09
+
+- David Ives added 14 new entries across the week of August 10, 2026, bringing his total from 301 to 315
+- New Broker clients added: CRC, Betterhomes (4 entries), Driven, Arabian Estates, Bk Real Estate, Seven Stones, and McCone Properties
+- New Developer clients added: Azha Properties and H&H
+- Added one Investor/End client: Investor
+- Added one Other cohort client: GAA
+- Olle Kjellberg: no changes this week
