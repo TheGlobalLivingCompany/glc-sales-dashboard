@@ -124,6 +124,19 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:"Jost",system
 .plan-row .num{text-align:right;font-variant-numeric:tabular-nums}
 .var-pos{color:var(--good);font-weight:600}.var-neg{color:var(--bad);font-weight:600}.var-zero{color:var(--muted)}
 
+/* click-through drill-downs */
+.drill{cursor:pointer}
+.drill:hover{background:var(--paper)}
+.drill-chev{display:inline-block;width:10px;color:var(--muted);transition:transform .15s ease;font-size:10px}
+.drill.open .drill-chev{transform:rotate(90deg)}
+.drill-panel{padding:10px 4px 14px;border-bottom:1px solid var(--line);background:var(--paper)}
+.drill-panel .dp-row{display:grid;grid-template-columns:64px 1fr 100px 1fr 1.4fr;gap:10px;padding:6px 4px;font-size:11.5px;border-bottom:1px solid var(--line-2);align-items:start}
+.drill-panel .dp-row.h{color:var(--muted);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--line-2)}
+.drill-panel .dp-note{color:var(--muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.drill-panel .dp-more{padding:8px 4px 0;color:var(--muted);font-size:11.5px}
+.drill-panel .dp-export{cursor:pointer;color:var(--clay);font-weight:600;text-decoration:none}
+.drill-panel .dp-export:hover{text-decoration:underline}
+
 /* meetings table */
 .tbl-controls{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 12px}
 .search{flex:1;min-width:180px;display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);
@@ -227,13 +240,13 @@ html[data-theme="dark"] .daterange input{color-scheme:dark}
     <div class="card panel">
       <div class="p-eyebrow">Recurring relationships</div>
       <div class="p-head"><div class="p-title">Top brokers — repeat meetings</div>
-        <div class="p-note">Success = New lead created, Proposals issued, or Deal progression</div></div>
+        <div class="p-note">Success = Proposals issued or Deal progression</div></div>
       <div class="plan-grid" id="recurringBrokers"></div>
     </div>
     <div class="card panel">
       <div class="p-eyebrow">Recurring relationships</div>
       <div class="p-head"><div class="p-title">Top developers — repeat meetings</div>
-        <div class="p-note">Success = New lead created, Proposals issued, or Deal progression</div></div>
+        <div class="p-note">Success = Proposals issued or Deal progression</div></div>
       <div class="plan-grid" id="recurringDevelopers"></div>
     </div>
   </div>
@@ -248,7 +261,7 @@ html[data-theme="dark"] .daterange input{color-scheme:dark}
   <div class="card panel" id="insightCard" style="margin-bottom:18px;display:none">
     <div class="p-eyebrow">Insights</div>
     <div class="p-head"><div class="p-title">Successful meetings by cohort</div>
-      <div class="p-note">Success = New lead created, Proposals issued, or Deal progression</div></div>
+      <div class="p-note">Success = Proposals issued or Deal progression</div></div>
     <div class="p-note" id="insightHeadline" style="margin:4px 0 12px;font-size:13px;color:var(--ink)"></div>
     <div class="hbars" id="insightBars"></div>
   </div>
@@ -257,7 +270,7 @@ html[data-theme="dark"] .daterange input{color-scheme:dark}
     <div class="p-eyebrow">Team leaderboard</div>
     <div class="p-head"><div class="p-title">Successful-meeting likelihood by salesperson &amp; cohort</div>
       <div class="fdrop"><select id="lbRange"></select></div></div>
-    <div class="p-note" id="lbRangeNote" style="margin-bottom:8px">Success = New lead created, Proposals issued, or Deal progression</div>
+    <div class="p-note" id="lbRangeNote" style="margin-bottom:8px">Success = Proposals issued or Deal progression</div>
     <div class="plan-grid" id="leaderboardGrid"></div>
   </div>
 
@@ -304,7 +317,21 @@ html[data-theme="dark"] .daterange input{color-scheme:dark}
   </div>
 
   <div class="section-label">Conversion</div>
-  <div class="grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:18px" id="convStrip"></div>
+  <div class="grid" style="grid-template-columns:1.6fr 1fr;margin-bottom:18px;align-items:stretch">
+    <div class="card panel">
+      <div class="p-eyebrow">Funnel</div>
+      <div class="p-head"><div class="p-title">Meeting → Deal funnel</div></div>
+      <div class="hbars" id="convFunnel"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div id="convAccuracy"></div>
+      <div class="card panel" style="flex:1">
+        <div class="p-eyebrow">Speed</div>
+        <div class="p-head"><div class="p-title">Avg. days to a successful outcome</div></div>
+        <div class="hbars" id="convSpeed"></div>
+      </div>
+    </div>
+  </div>
 
   <div class="section-label">This week &amp; last week (from planner)</div>
   <div class="grid row2" style="margin-bottom:18px">
@@ -342,6 +369,7 @@ html[data-theme="dark"] .daterange input{color-scheme:dark}
       <label class="daterange"><span class="dl">From</span><input type="date" id="dFrom"></label>
       <label class="daterange"><span class="dl">To</span><input type="date" id="dTo"></label>
       <button class="clearbtn" id="clearDates" title="Clear date range">Clear dates</button>
+      <button class="clearbtn" id="exportLog" title="Export the currently filtered meetings as CSV">⤓ Export CSV</button>
     </div>
     <div class="tbl-scroll"><table class="mtbl"><thead><tr>
       <th>Date</th><th>Client</th><th>Cohort</th><th>Type</th><th>Objective</th>
@@ -390,12 +418,28 @@ const OWNER_COLORS = {'David Ives':'#321D1C','Olle Kjellberg':'#A06C44'};
 const OUTCOME_ORDER = ['New lead created','Send Brochure','Send Referral Agreement',
   'Qualify opportunity','Proposals / Quotes Issuance','Deal progression','Rescheduled'];
 
-const state = { person: PEOPLE[0], period: 'all', search:'', fType:'', fCohort:'', fMatch:'', dFrom:'', dTo:'' };
+const state = { person: PEOPLE[0], period: 'all', search:'', fType:'', fCohort:'', fMatch:'', dFrom:'', dTo:'', lbExpanded:null, insightExpanded:null };
 
 const $ = s => document.querySelector(s);
 const fmtN = n => n.toLocaleString('en-US');
 const pct = (a,b) => b ? Math.round(a/b*100) : 0;
 const parseD = s => s ? new Date(s+'T00:00:00') : null;
+
+/* ---------- CSV export (drill-downs + meeting log) ---------- */
+function csvCell(v){ const s=(v==null?'':String(v)).replace(/"/g,'""'); return /[",\n]/.test(s)?`"${s}"`:s; }
+function toCSV(recs){
+  const header=['Date','Client','Cohort','Type','Objective','Expected','Actual','Notes'];
+  const lines=[header.join(',')];
+  recs.forEach(r=>lines.push([r.d||r.w||'',r.c||'',r.co||'',r.t||'',r.o||'',r.e||'',r.a||'',r.n||''].map(csvCell).join(',')));
+  return lines.join('\n');
+}
+function downloadCSV(filename, recs){
+  const blob=new Blob([toCSV(recs)],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+const _drillRecs={}; // stashed records per drill-down context, for the export button
 
 /* ---------- combined / per-person data resolution ---------- */
 function mergeDashboards(){
@@ -580,10 +624,19 @@ function weeklyKPIBreakdown(records){
   });
   return Object.keys(m).sort().map(w=>({week:w,...m[w]}));
 }
-function deltaPill(delta, unit){
+function deltaPill(delta, unit, label){
   const dir = delta>0?'up':delta<0?'down':'flat';
   const arrow = delta>0?'▲':delta<0?'▼':'–';
-  return `<span class="pill ${dir}">${arrow} ${Math.abs(delta)}${unit||''} vs prior</span>`;
+  return `<span class="pill ${dir}">${arrow} ${Math.abs(delta)}${unit||''} ${label||'vs prior'}</span>`;
+}
+// records for the window immediately preceding the current fixed-length period (null for '1w' n/a or 'all', which have no natural prior window)
+function priorPeriodRecords(){
+  const map = {'1w':1,'4w':4,'8w':8,'12w':12};
+  const n = map[state.period]; if(!n) return null;
+  const cut = periodCut(); if(!cut) return null;
+  const priorEnd = new Date(cut); priorEnd.setDate(priorEnd.getDate()-1);
+  const priorStart = new Date(cut); priorStart.setDate(priorStart.getDate()-7*n);
+  return allRecords().filter(r=>{ const w=parseD(r.w); return w && w>=priorStart && w<=priorEnd; });
 }
 function renderKPIs(){
   const recs=periodRecords(), sc=scored(recs), all=allRecords();
@@ -601,13 +654,25 @@ function renderKPIs(){
   const dMatch = (kLast&&kPrev)? matchRateFor(kLast)-matchRateFor(kPrev) : 0;
   const dSuccessful = (kLast&&kPrev)? kLast.successful-kPrev.successful : 0;
   const plan = getPersonData(state.person).dashboard.planTotal;
+  let meetingsSub=`across ${ws.filter(w=>w.meetings>0).length} active weeks`;
+  let matchSub=`${matched} of ${sc.length} on forecast`;
+  let successfulSub=`${pct(successful,recs.length)}% of meetings`;
+  const priorRecs = priorPeriodRecords();
+  if(priorRecs){
+    const priorSuccessful = priorRecs.filter(r=>SUCCESS_OUTCOMES.includes(r.a)).length;
+    const priorSc = scored(priorRecs);
+    const priorMatchRate = pct(priorSc.filter(r=>r.a===r.e).length, priorSc.length);
+    meetingsSub += ` · ${deltaPill(recs.length-priorRecs.length,'','vs previous period')}`;
+    matchSub += ` · ${deltaPill(matchRate-priorMatchRate,'pp','vs previous period')}`;
+    successfulSub += ` · ${deltaPill(successful-priorSuccessful,'','vs previous period')}`;
+  }
   const cards=[
-    {lab:'Meetings',val:recs.length,sub:`across ${ws.filter(w=>w.meetings>0).length} active weeks`,spark:ws},
+    {lab:'Meetings',val:recs.length,sub:meetingsSub,spark:ws},
     {lab:'Latest week',val:last?last.meetings:0,
       sub:`<span class="pill ${wow>0?'up':wow<0?'down':'flat'}">${wow>0?'▲':wow<0?'▼':'–'} ${Math.abs(wow)} vs prior</span>`},
-    {lab:'Outcome match',val:matchRate,u:'%',sub:`${matched} of ${sc.length} on forecast`},
+    {lab:'Outcome match',val:matchRate,u:'%',sub:matchSub},
     {lab:'Outcome match this week',val:kLast?matchRateFor(kLast):0,u:'%',sub:deltaPill(dMatch,'pp')},
-    {lab:'Successful meetings',val:successful,sub:`${pct(successful,recs.length)}% of meetings`},
+    {lab:'Successful meetings',val:successful,sub:successfulSub},
     {lab:'Successful meetings this week',val:kLast?kLast.successful:0,sub:deltaPill(dSuccessful)},
   ];
   $('#kpis').innerHTML=cards.map(c=>`<div class="card kpi">
@@ -718,7 +783,7 @@ function renderRecurringClients(){
 }
 
 /* ---------- successful-meeting insights ---------- */
-const SUCCESS_OUTCOMES = ['New lead created','Proposals / Quotes Issuance','Deal progression'];
+const SUCCESS_OUTCOMES = ['Proposals / Quotes Issuance','Deal progression'];
 function cohortSuccessStats(recs){
   const m={};
   recs.forEach(r=>{
@@ -729,6 +794,39 @@ function cohortSuccessStats(recs){
   });
   return Object.values(m).map(o=>({...o,rate:pct(o.s,o.n)})).sort((a,b)=>b.rate-a.rate||b.n-a.n);
 }
+/* ---------- shared: drill-down meeting list for click-throughs ---------- */
+function drillPanelHTML(recs, cap=25, ctxKey=null){
+  const fmt=s=>{const d=parseD(s);return d?d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}):'—';};
+  const sorted=[...recs].sort((a,b)=>(b.d||b.w||'').localeCompare(a.d||a.w||''));
+  if(ctxKey) _drillRecs[ctxKey]=sorted;
+  const exportBtn = ctxKey ? `<a class="dp-export" data-drill-ctx="${ctxKey}" title="Export these meetings as CSV">⤓ Export CSV</a>` : '';
+  if(!sorted.length) return `<div class="drill-panel"><div class="dp-more">No meetings found for this selection.</div></div>`;
+  // compact success-rate-over-time trend, only shown when there's more than one active week to compare
+  const wk={};
+  recs.forEach(r=>{ if(!r.w) return; wk[r.w]=wk[r.w]||{meetings:0,succ:0}; wk[r.w].meetings++; if(SUCCESS_OUTCOMES.includes(r.a)) wk[r.w].succ++; });
+  const wkSeries=Object.keys(wk).sort().map(w=>({w,meetings:pct(wk[w].succ,wk[w].meetings)}));
+  const trend = wkSeries.length>=2
+    ? `<div style="display:flex;align-items:center;gap:8px;padding:2px 4px 10px;font-size:11px;color:var(--muted)">
+        <span>Success rate, ${fmt(wkSeries[0].w)}–${fmt(wkSeries[wkSeries.length-1].w)}:</span>
+        <span style="width:90px">${sparkline(wkSeries,90,22)}</span>
+        <span>${wkSeries[0].meetings}% → ${wkSeries[wkSeries.length-1].meetings}%</span></div>`
+    : '';
+  let g=`<div class="drill-panel">${trend}<div class="dp-row h"><span>Date</span><span>Client</span><span>Type</span><span>Outcome</span><span>Notes</span></div>`;
+  g+=sorted.slice(0,cap).map(r=>{
+    const succ=SUCCESS_OUTCOMES.includes(r.a);
+    return `<div class="dp-row">
+      <span style="color:var(--muted)">${fmt(r.d||r.w)}</span>
+      <span style="font-weight:500">${r.c||'—'}${state.person===TEAM&&r.who?` <span style="color:var(--muted);font-weight:400">· ${r.who.split(' ')[0]}</span>`:''}</span>
+      <span style="color:var(--muted)">${r.t||'—'}</span>
+      <span style="${succ?'color:var(--good);font-weight:600':''}">${r.a||'—'}</span>
+      <span class="dp-note" title="${(r.n||'').replace(/"/g,'&quot;')}">${r.n||''}</span></div>`;
+  }).join('');
+  if(sorted.length>cap) g+=`<div class="dp-more">+${sorted.length-cap} more meeting${sorted.length-cap===1?'':'s'} in this selection — see the Meeting Log below for the full list.</div>`;
+  g+=`<div class="dp-more" style="text-align:right">${exportBtn}</div>`;
+  g+='</div>';
+  return g;
+}
+
 /* ---------- weekly commentary (agent-generated, read-only display) ---------- */
 function renderCommentary(){
   const card=$('#commentaryCard');
@@ -758,14 +856,20 @@ function renderInsights(){
   const first=state.person.split(' ')[0];
   $('#insightHeadline').innerHTML=
     `Based on ${stats.reduce((t,s)=>t+s.n,0)} logged meetings, <b>${first}</b> is most likely to have a successful meeting with `+
-    `<b>${best.k}</b> — <b>${best.rate}%</b> of those meetings produced a new lead or deal progression (${best.s} of ${best.n}).`+
+    `<b>${best.k}</b> — <b>${best.rate}%</b> of those meetings produced a proposal or deal progression (${best.s} of ${best.n}).`+
     (reliable.length<stats.length?` <span style="color:var(--muted)">Cohorts with fewer than ${MIN_N} meetings are shown below but excluded from the headline.</span>`:'');
   const lc=Object.fromEntries(COHORT_LINES.map(l=>[l.k,l.c]));
-  $('#insightBars').innerHTML=stats.map(s=>`<div class="hbar">
-    <span class="nm" title="${s.k}">${s.k}${s.n<MIN_N?' <span style="color:var(--muted);font-size:10px">(low sample)</span>':''}</span>
-    <div class="track"><div class="fill" style="width:${s.rate}%;background:${lc[s.k]||'var(--slate)'}"></div></div>
-    <span class="n" title="${s.s} successful of ${s.n} meetings">${s.rate}%</span></div>`).join('')+
-    `<div class="p-note" style="margin-top:8px">${stats.map(s=>`${s.k}: ${s.s}/${s.n}`).join(' · ')}</div>`;
+  const recs=DATA[state.person].records;
+  $('#insightBars').innerHTML=stats.map(s=>{
+    const open=state.insightExpanded===s.k;
+    const bar=`<div class="hbar drill${open?' open':''}" data-cokey="${s.k}">
+      <span class="nm" title="Click to see the meetings behind this"><span class="drill-chev">▸</span>${s.k}${s.n<MIN_N?' <span style="color:var(--muted);font-size:10px">(low sample)</span>':''}</span>
+      <div class="track"><div class="fill" style="width:${s.rate}%;background:${lc[s.k]||'var(--slate)'}"></div></div>
+      <span class="n" title="${s.s} successful of ${s.n} meetings">${s.rate}%</span></div>`;
+    const panel=open?drillPanelHTML(recs.filter(r=>r.co===s.k),25,'insight'):'';
+    return bar+panel;
+  }).join('')+
+    `<div class="p-note" style="margin-top:8px">${stats.map(s=>`${s.k}: ${s.s}/${s.n}`).join(' · ')} — click a cohort above to see the meetings behind it.</div>`;
 }
 const LB_RANGES = (function(){
   const to = TRACK_TO_DATE;
@@ -809,20 +913,24 @@ function renderLeaderboard(){
   REAL_PEOPLE.forEach(p=>cohortSuccessStats(lbFilteredRecords(p)).forEach(s=>rows.push({p,...s})));
   rows.sort((a,b)=>b.rate-a.rate||b.s-a.s);
   const totalMeetings=rows.reduce((t,r)=>t+r.n,0);
-  $('#lbRangeNote').textContent=`Success = New lead created, Proposals issued, or Deal progression · ${rg.lab} · ${totalMeetings} meetings in range`;
+  $('#lbRangeNote').textContent=`Success = Proposals issued or Deal progression · ${rg.lab} · ${totalMeetings} meetings in range`;
   if(!rows.length){ $('#leaderboardGrid').innerHTML='<div class="p-note" style="margin-top:10px">No meetings logged in this range.</div>'; return; }
   const lc=Object.fromEntries(COHORT_LINES.map(l=>[l.k,l.c]));
   let g=`<div class="plan-row h" style="grid-template-columns:26px 1fr 1fr 2fr 64px 60px"><span>#</span><span>Salesperson</span><span>Cohort</span><span></span><span class="num">Succ.</span><span class="num">Chance</span></div>`;
   g+=rows.map((r,i)=>{
     const oc=OWNER_COLORS[r.p]||'var(--slate)';
     const cc=lc[r.k]||'var(--slate)';
-    return `<div class="plan-row" style="grid-template-columns:26px 1fr 1fr 2fr 64px 60px">
+    const key=`${r.p}||${r.k}`;
+    const open=state.lbExpanded===key;
+    const row=`<div class="plan-row drill${open?' open':''}" data-lbkey="${key}" style="grid-template-columns:26px 1fr 1fr 2fr 64px 60px">
       <span style="color:var(--muted)">${i+1}</span>
       <span><span class="owner-tag" style="background:${oc}1f;color:${oc}">${r.p.split(' ')[0]}</span></span>
-      <span class="nm">${r.k}${r.n<5?' <span style="color:var(--muted);font-size:10px">(low sample)</span>':''}</span>
+      <span class="nm"><span class="drill-chev">▸</span>${r.k}${r.n<5?' <span style="color:var(--muted);font-size:10px">(low sample)</span>':''}</span>
       <span><div class="track" style="height:9px;background:var(--paper);border-radius:6px;overflow:hidden"><div class="fill" style="height:100%;border-radius:6px;width:${r.rate}%;background:${cc}"></div></div></span>
       <span class="num" style="color:var(--muted)">${r.s}/${r.n}</span>
       <span class="num" style="font-weight:600">${r.rate}%</span></div>`;
+    const panel=open?drillPanelHTML(lbFilteredRecords(r.p).filter(x=>x.co===r.k),25,'lb'):'';
+    return row+panel;
   }).join('');
   $('#leaderboardGrid').innerHTML=g;
 }
@@ -858,11 +966,16 @@ function renderCoachInsights(){
   }).join('');
   const stalled=Object.values(byClient).filter(c=>c.n===1&&c.succ===0)
     .sort((a,b)=>b.last.localeCompare(a.last));
+  const midStalled=Object.values(byClient).filter(c=>c.n>=2&&c.succ===0)
+    .sort((a,b)=>a.last.localeCompare(b.last)); // stalest first
   $('#momentumNote').innerHTML=`The money is in the follow-up: <b>${stalled.length} client${stalled.length===1?'':'s'}</b> met once with no successful outcome and no second meeting booked.`;
   const SHOW=8;
-  $('#momentumList').innerHTML = stalled.length
+  $('#momentumList').innerHTML = (stalled.length
     ? `<div class="alert warn"><span class="ic">!</span><span class="t"><b>Call sheet:</b> ${stalled.slice(0,SHOW).map(c=>`${c.name} <span style="color:var(--muted)">(${fmt(c.last)})</span>`).join(' · ')}${stalled.length>SHOW?` <span style="color:var(--muted)">+${stalled.length-SHOW} more in the meeting log</span>`:''}</span></div>`
-    : `<div class="alert ok"><span class="ic">✓</span><span class="t">No clients stalled at a single meeting.</span></div>`;
+    : `<div class="alert ok"><span class="ic">✓</span><span class="t">No clients stalled at a single meeting.</span></div>`)
+  + (midStalled.length
+    ? `<div class="alert warn"><span class="ic">!</span><span class="t"><b>Stalled mid-pipeline (2+ meetings, no lead/proposal/deal yet):</b> ${midStalled.slice(0,SHOW).map(c=>`${c.name} <span style="color:var(--muted)">(${c.n} mtgs, last ${fmt(c.last)})</span>`).join(' · ')}${midStalled.length>SHOW?` <span style="color:var(--muted)">+${midStalled.length-SHOW} more in the meeting log</span>`:''}</span></div>`
+    : '');
 
   /* 2 — reschedule recovery */
   const reschedClients={};
@@ -948,19 +1061,54 @@ function renderBreakdowns(){
   $('#outcomeBars').innerHTML=hbars(tally('a',OUTCOME_ORDER),it=>it.k==='Rescheduled'?'var(--taupe)':'var(--camel)');
 }
 
+function timeToConversionByCohort(recs){
+  const byClient={};
+  [...recs].filter(r=>r.d).sort((a,b)=>a.d.localeCompare(b.d)).forEach(r=>{
+    const c=clientKey(r); if(!c) return;
+    byClient[c]=byClient[c]||{cohort:r.co,first:r.d,successAt:null};
+    if(SUCCESS_OUTCOMES.includes(r.a) && !byClient[c].successAt) byClient[c].successAt=r.d;
+  });
+  const byCohort={};
+  Object.values(byClient).forEach(c=>{
+    if(!c.successAt || !c.cohort) return;
+    const days=Math.round((new Date(c.successAt)-new Date(c.first))/86400000);
+    if(days<0) return;
+    byCohort[c.cohort]=byCohort[c.cohort]||{k:c.cohort,total:0,n:0};
+    byCohort[c.cohort].total+=days; byCohort[c.cohort].n++;
+  });
+  return Object.values(byCohort).map(o=>({k:o.k,avg:Math.round(o.total/o.n),n:o.n})).sort((a,b)=>a.avg-b.avg);
+}
 function renderConversion(){
   const recs=periodRecords(), sc=scored(recs), n=recs.length;
   const cnt=a=>recs.filter(r=>r.a===a).length;
   const matched=sc.filter(r=>r.a===r.e).length;
-  const metrics=[
-    {lab:'Meeting → Lead',v:pct(cnt('New lead created'),n)},
-    {lab:'Meeting → Qualified',v:pct(cnt('Qualify opportunity'),n)},
-    {lab:'Meeting → Proposal',v:pct(cnt('Proposals / Quotes Issuance'),n)},
-    {lab:'Meeting → Deal progression',v:pct(cnt('Deal progression'),n)},
-    {lab:'Forecast accuracy',v:pct(matched,sc.length)},
+  const stages=[
+    {lab:'Meetings',v:n},
+    {lab:'→ New lead',v:cnt('New lead created')},
+    {lab:'→ Qualified',v:cnt('Qualify opportunity')},
+    {lab:'→ Proposal',v:cnt('Proposals / Quotes Issuance')},
+    {lab:'→ Deal progression',v:cnt('Deal progression')},
   ];
-  $('#convStrip').innerHTML=metrics.map(m=>`<div class="card kpi" style="min-height:96px">
-    <div class="k-lab">${m.lab}</div><div class="k-val">${m.v}<span class="u">%</span></div></div>`).join('');
+  const max=stages[0].v||1;
+  $('#convFunnel').innerHTML = stages.map((s,i)=>{
+    const ofTotal=pct(s.v,n);
+    const ofPrior = i>0 ? pct(s.v, stages[i-1].v||1) : null;
+    return `<div class="hbar" style="grid-template-columns:118px 1fr 122px">
+      <span class="nm">${s.lab}</span>
+      <div class="track"><div class="fill" style="width:${pct(s.v,max)}%;background:var(--clay)"></div></div>
+      <span class="n">${fmtN(s.v)}${i>0?` <span style="color:var(--muted);font-size:10px">${ofTotal}% of mtgs · ${ofPrior}% of prior</span>`:''}</span></div>`;
+  }).join('');
+  $('#convAccuracy').innerHTML = `<div class="card kpi" style="min-height:96px">
+    <div class="k-lab">Forecast accuracy</div>
+    <div class="k-val">${pct(matched,sc.length)}<span class="u">%</span></div>
+    <div class="k-sub">${matched} of ${sc.length} outcomes matched forecast</div></div>`;
+  const speed=timeToConversionByCohort(recs);
+  const lc=Object.fromEntries(COHORT_LINES.map(l=>[l.k,l.c]));
+  const maxDays=Math.max(1,...speed.map(s=>s.avg));
+  $('#convSpeed').innerHTML = speed.length ? speed.map(s=>`<div class="hbar">
+    <span class="nm" title="${s.k}">${s.k}${s.n<5?' <span style="color:var(--muted);font-size:10px">(low sample)</span>':''}</span>
+    <div class="track"><div class="fill" style="width:${pct(s.avg,maxDays)}%;background:${lc[s.k]||'var(--slate)'}"></div></div>
+    <span class="n">${s.avg}d</span></div>`).join('') : '<div class="p-note">Not enough converted clients yet in this period to measure.</div>';
 }
 
 function renderPlanLastWeek(){
@@ -1120,7 +1268,7 @@ function renderFootnote(){
    Monday.com opportunity sync and multi-user roles.`;
 }
 
-function resetFilters(){ state.search='';state.fType='';state.fCohort='';state.fMatch='';state.dFrom='';state.dTo=''; }
+function resetFilters(){ state.search='';state.fType='';state.fCohort='';state.fMatch='';state.dFrom='';state.dTo='';state.lbExpanded=null;state.insightExpanded=null; }
 
 function renderAll(){
   renderPersonStrip(); renderMeta(); renderKPIs(); renderTrend(); renderCohortTrend(); renderRecurringClients(); renderCommentary(); renderInsights(); renderCoachInsights(); renderLeaderboard(); renderForecast();
@@ -1142,6 +1290,13 @@ document.addEventListener('change',e=>{
 });
 document.addEventListener('click',e=>{
   if(e.target.id==='clearDates'){state.dFrom='';state.dTo='';$('#dFrom').value='';$('#dTo').value='';renderLog();}
+  if(e.target.id==='exportLog'){downloadCSV(`GLC-meeting-log-${state.person.replace(/\s/g,'-')}.csv`, logRows());}
+  const drillExport=e.target.closest('[data-drill-ctx]');
+  if(drillExport){ const k=drillExport.dataset.drillCtx; downloadCSV(`GLC-drilldown-${k}-${state.person.replace(/\s/g,'-')}.csv`, _drillRecs[k]||[]); return; }
+  const lbRow=e.target.closest('[data-lbkey]');
+  if(lbRow){ const k=lbRow.dataset.lbkey; state.lbExpanded=(state.lbExpanded===k)?null:k; renderLeaderboard(); return; }
+  const coBar=e.target.closest('[data-cokey]');
+  if(coBar){ const k=coBar.dataset.cokey; state.insightExpanded=(state.insightExpanded===k)?null:k; renderInsights(); return; }
 });
 $('#themeBtn').onclick=()=>{
   const h=document.documentElement;
