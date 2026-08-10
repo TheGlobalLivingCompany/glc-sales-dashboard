@@ -9233,11 +9233,24 @@
         "e": null,
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2825754520",
+        "w": "2026-08-10",
+        "d": "2026-08-13",
+        "c": "Manish",
+        "p": "Alejandro Suarez",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
       "thisWeek": "2026-08-10",
-      "planTotal": 11,
+      "planTotal": 12,
       "planByType": [
         {
           "k": "Intro / first meeting",
@@ -9245,7 +9258,7 @@
         },
         {
           "k": "Existing client meeting",
-          "v": 4
+          "v": 5
         },
         {
           "k": "New client meeting",
@@ -9279,7 +9292,7 @@
         },
         {
           "k": "Deal progression",
-          "v": 2
+          "v": 3
         },
         {
           "k": "Proposals / Presentation",
