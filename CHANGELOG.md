@@ -259,3 +259,9 @@
 - Olle Kjellberg moved H&H to "Proposals / Quotes Issuance" stage
 - Olle Kjellberg qualified HThree as an opportunity
 - Olle Kjellberg's total opportunities increased from 384 to 387
+
+## 2026-08-10
+
+- Olle Kjellberg added two new leads with Metropolitan Premium Properties this week—one in the Investor/End client cohort and one in the Broker cohort
+- Metropolitan Premium Properties Broker contact has been marked as a new lead created
+- David Ives had no changes this week
