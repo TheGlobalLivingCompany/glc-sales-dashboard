@@ -404,7 +404,7 @@ html[data-theme="dark"] .daterange input{color-scheme:dark}
   <div class="grid panels" style="margin-bottom:18px;grid-template-columns:1.5fr 1fr">
     <div class="card panel">
       <div class="p-eyebrow">Installs</div>
-      <div class="p-head"><div class="p-title">Installs commencing per month</div></div>
+      <div class="p-head"><div class="p-title">Installs commencing per month — weighted value</div></div>
       <div id="installsChart"></div>
     </div>
     <div class="card panel">
@@ -412,6 +412,11 @@ html[data-theme="dark"] .daterange input{color-scheme:dark}
       <div class="p-head"><div class="p-title">Leads by stage</div></div>
       <div class="hbars" id="stageBars"></div>
     </div>
+  </div>
+  <div class="card panel" style="margin-bottom:18px">
+    <div class="p-eyebrow">Forecast</div>
+    <div class="p-head"><div class="p-title">Next 6 weeks — projects with an install date</div></div>
+    <div id="projectsForecast"></div>
   </div>
   <div class="card panel" style="margin-bottom:18px">
     <div class="p-eyebrow">Buildings</div>
@@ -1397,6 +1402,10 @@ document.addEventListener('click',e=>{
   if(clientRow){ const k=clientRow.dataset.clientkey; state.clientExpanded=(state.clientExpanded===k)?null:k; state.agentExpanded=null; renderRecurringClients(); return; }
   const agentRow=e.target.closest('[data-agentkey]');
   if(agentRow){ const k=agentRow.dataset.agentkey; state.agentExpanded=(state.agentExpanded===k)?null:k; renderRecurringClients(); return; }
+  const instRow=e.target.closest('[data-instmonth]');
+  if(instRow){ const k=instRow.dataset.instmonth; pState.instExpanded=(pState.instExpanded===k)?null:k; renderInstallsChart(); return; }
+  const bldgRow=e.target.closest('[data-bldg]');
+  if(bldgRow){ const k=bldgRow.dataset.bldg; pState.bldgExpanded=(pState.bldgExpanded===k)?null:k; renderBuildingPanel(); return; }
 });
 $('#themeBtn').onclick=()=>{
   const h=document.documentElement;
@@ -1408,10 +1417,23 @@ $('#themeBtn').onclick=()=>{
 const PROJECTS = window.GLC_PROJECTS || [];
 const WON_STATUS = '100%', LOST_STATUS = 'Lost';
 const LEAD_TIME_EXCLUDE_GROUPS = ['New Leads - Awaiting Brief', 'On Hold']; // paused/unbriefed leads distort "time to send a proposal"
-const pState = { search:'', stage:'' };
+const pState = { search:'', stage:'', instExpanded:null, bldgExpanded:null };
 const fmtAED = v => v==null ? '—' : 'AED ' + fmtN(Math.round(v));
 function pDays(a,b){ const d1=parseD(a), d2=parseD(b); if(!d1||!d2) return null; const d=Math.round((d2-d1)/86400000); return d>=0?d:null; }
 function pAvg(arr){ const a=arr.filter(v=>v!=null); return a.length ? Math.round(a.reduce((x,y)=>x+y,0)/a.length) : null; }
+function projectsDrillPanelHTML(recs){
+  const sorted=[...recs].sort((a,b)=>(b.installDate||b.createdAt||'').localeCompare(a.installDate||a.createdAt||''));
+  if(!sorted.length) return `<div class="drill-panel"><div class="dp-more">No projects found for this selection.</div></div>`;
+  let g=`<div class="drill-panel"><div class="dp-row h" style="grid-template-columns:1.8fr 70px 1fr 1fr 1fr"><span>Project</span><span>Status</span><span>Client</span><span>Value</span><span>Weighted</span></div>`;
+  g+=sorted.map(p=>`<div class="dp-row" style="grid-template-columns:1.8fr 70px 1fr 1fr 1fr">
+    <span style="font-weight:500">${p.name||'—'}</span>
+    <span>${p.status||'—'}</span>
+    <span style="color:var(--muted)">${p.client||'—'}</span>
+    <span>${fmtAED(p.valueAED)}</span>
+    <span>${fmtAED(p.weightedValueAED)}</span></div>`).join('');
+  g+='</div>';
+  return g;
+}
 
 function switchPage(pg){
   $('#salesPage').style.display = pg==='sales' ? '' : 'none';
@@ -1446,17 +1468,22 @@ function renderInstallsChart(){
   PROJECTS.forEach(p=>{
     if(!p.installDate) return;
     const key=p.installDate.slice(0,7);
-    byMonth[key]=byMonth[key]||{count:0,value:0};
-    byMonth[key].count++; byMonth[key].value+=(p.valueAED||0);
+    byMonth[key]=byMonth[key]||{count:0,weighted:0,recs:[]};
+    byMonth[key].count++; byMonth[key].weighted+=(p.weightedValueAED||0); byMonth[key].recs.push(p);
   });
   const months=Object.keys(byMonth).sort();
   if(!months.length){ $('#installsChart').innerHTML='<div class="p-note">No install dates logged yet.</div>'; return; }
-  const maxVal=Math.max(1,...months.map(m=>byMonth[m].value));
+  const maxVal=Math.max(1,...months.map(m=>byMonth[m].weighted));
   const fmt=m=>{ const [y,mo]=m.split('-'); return new Date(+y,+mo-1,1).toLocaleDateString('en-GB',{month:'short',year:'2-digit'}); };
-  $('#installsChart').innerHTML=months.map(m=>`<div class="hbar">
-    <span class="nm">${fmt(m)}</span>
-    <div class="track"><div class="fill" style="width:${pct(byMonth[m].value,maxVal)}%;background:var(--clay)"></div></div>
-    <span class="n">${fmtAED(byMonth[m].value)} <span style="color:var(--muted);font-weight:400;font-size:11px">(${byMonth[m].count})</span></span></div>`).join('');
+  $('#installsChart').innerHTML=months.map(m=>{
+    const open=pState.instExpanded===m;
+    const bar=`<div class="hbar drill${open?' open':''}" data-instmonth="${m}">
+      <span class="nm"><span class="drill-chev">▸</span>${fmt(m)}</span>
+      <div class="track"><div class="fill" style="width:${pct(byMonth[m].weighted,maxVal)}%;background:var(--clay)"></div></div>
+      <span class="n">${fmtAED(byMonth[m].weighted)} <span style="color:var(--muted);font-weight:400;font-size:11px">(${byMonth[m].count})</span></span></div>`;
+    const panel=open?projectsDrillPanelHTML(byMonth[m].recs):'';
+    return bar+panel;
+  }).join('');
 }
 function renderStageBars(){
   const order=['0%','25%','50%','75%','100%','Lost'];
@@ -1469,6 +1496,45 @@ function renderStageBars(){
     <div class="track"><div class="fill" style="width:${pct(counts[s]||0,max)}%;background:${colors[s]}"></div></div>
     <span class="n">${counts[s]||0}</span></div>`).join('');
 }
+function weekMonday(dateStr){
+  const d=parseD(dateStr); if(!d) return null;
+  const day=d.getDay(); const diff=day===0?-6:1-day;
+  const m=new Date(d); m.setDate(m.getDate()+diff); m.setHours(0,0,0,0);
+  return m;
+}
+function renderProjectsForecast(){
+  const today=new Date(); today.setHours(0,0,0,0);
+  const horizon=new Date(today); horizon.setDate(horizon.getDate()+42); // 6 weeks
+  const upcoming=PROJECTS.filter(p=>{ const d=parseD(p.installDate); return d && d>=today && d<=horizon; })
+    .sort((a,b)=>a.installDate.localeCompare(b.installDate));
+  if(!upcoming.length){
+    $('#projectsForecast').innerHTML='<div class="p-note">No projects with an install date in the next 6 weeks.</div>';
+    return;
+  }
+  const weeks={};
+  upcoming.forEach(p=>{
+    const mon=weekMonday(p.installDate);
+    const key=mon.toISOString().slice(0,10);
+    weeks[key]=weeks[key]||[];
+    weeks[key].push(p);
+  });
+  const weekKeys=Object.keys(weeks).sort();
+  const fmtWk=k=>{ const d=parseD(k); const end=new Date(d); end.setDate(end.getDate()+6);
+    return `${d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})} – ${end.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})}`; };
+  $('#projectsForecast').innerHTML=weekKeys.map(k=>{
+    const items=weeks[k];
+    const total=items.reduce((s,p)=>s+(p.valueAED||0),0);
+    const rows=items.map(p=>`<div class="dp-row" style="grid-template-columns:1.6fr 1.2fr 70px 1fr">
+      <span style="font-weight:500">${p.name}</span>
+      <span style="color:var(--muted)">${p.building||p.location||'—'}</span>
+      <span>${p.status||'—'}</span>
+      <span>${fmtAED(p.valueAED)}</span></div>`).join('');
+    return `<div style="margin-bottom:14px">
+      <div class="p-note" style="font-weight:600;color:var(--ink);margin-bottom:4px">Week of ${fmtWk(k)} <span style="font-weight:400;color:var(--muted)">· ${items.length} project${items.length===1?'':'s'} · ${fmtAED(total)}</span></div>
+      <div class="dp-row h" style="grid-template-columns:1.6fr 1.2fr 70px 1fr"><span>Project</span><span>Building</span><span>Status</span><span>Value</span></div>
+      ${rows}</div>`;
+  }).join('');
+}
 const FOCUS_BUILDINGS=['City Tower 1','Allegro Residences'];
 function renderBuildingPanel(){
   const rows=FOCUS_BUILDINGS.map(name=>{
@@ -1477,19 +1543,24 @@ function renderBuildingPanel(){
     const won=leads.filter(p=>p.status===WON_STATUS);
     const quoting=leads.filter(p=>p.quoteDate); // has had a proposal/quote sent
     const wonValue=won.reduce((s,p)=>s+(p.valueAED||0),0);
-    return {name,n,wonPct:pct(won.length,n),quotingPct:pct(quoting.length,n),wonValue,wonCount:won.length};
+    return {name,leads,n,wonPct:pct(won.length,n),quotingPct:pct(quoting.length,n),wonValue,wonCount:won.length};
   });
   if(!rows.some(r=>r.n>0)){
     $('#buildingPanel').innerHTML=`<div class="p-note">No leads logged yet for ${FOCUS_BUILDINGS.join(' or ')} — check back once the Building column is filled in for these.</div>`;
     return;
   }
   let g=`<div class="plan-row h" style="grid-template-columns:1.3fr 64px 70px 90px 1.3fr"><span>Building</span><span class="num">Leads</span><span class="num">% Won</span><span class="num">% Quoting</span><span class="num">Value won</span></div>`;
-  g+=rows.map(r=>`<div class="plan-row" style="grid-template-columns:1.3fr 64px 70px 90px 1.3fr">
-    <span class="nm" style="font-weight:500">${r.name}</span>
-    <span class="num" style="color:var(--muted)">${r.n}</span>
-    <span class="num" style="font-weight:600">${r.n?r.wonPct+'%':'—'}</span>
-    <span class="num" style="font-weight:600">${r.n?r.quotingPct+'%':'—'}</span>
-    <span class="num" style="font-weight:600">${fmtAED(r.wonValue)} <span style="font-weight:400;color:var(--muted);font-size:11px">(${r.wonCount})</span></span></div>`).join('');
+  g+=rows.map(r=>{
+    const open=pState.bldgExpanded===r.name;
+    const row=`<div class="plan-row drill${open?' open':''}" data-bldg="${r.name}" style="grid-template-columns:1.3fr 64px 70px 90px 1.3fr">
+      <span class="nm" style="font-weight:500"><span class="drill-chev">▸</span>${r.name}</span>
+      <span class="num" style="color:var(--muted)">${r.n}</span>
+      <span class="num" style="font-weight:600">${r.n?r.wonPct+'%':'—'}</span>
+      <span class="num" style="font-weight:600">${r.n?r.quotingPct+'%':'—'}</span>
+      <span class="num" style="font-weight:600">${fmtAED(r.wonValue)} <span style="font-weight:400;color:var(--muted);font-size:11px">(${r.wonCount})</span></span></div>`;
+    const panel=open?projectsDrillPanelHTML(r.leads):'';
+    return row+panel;
+  }).join('');
   $('#buildingPanel').innerHTML=g;
 }
 function pFilteredRows(){
@@ -1547,7 +1618,7 @@ function renderProjectsPage(){
     $('#pStage').innerHTML='<option value="">All stages</option>'+stages.map(s=>`<option value="${s}">${s}</option>`).join('');
     $('#pStage').dataset.built='1';
   }
-  renderProjectsKPIs(); renderPipelineTrend(); renderInstallsChart(); renderStageBars(); renderBuildingPanel(); renderProjectsTable();
+  renderProjectsKPIs(); renderPipelineTrend(); renderInstallsChart(); renderStageBars(); renderProjectsForecast(); renderBuildingPanel(); renderProjectsTable();
   $('#pFootnote').innerHTML=`Live preview · data read directly from the Monday.com "Projects" board. "Win rate" compares projects at 100% vs. Lost; projects still in progress aren't counted as decided yet.`;
 }
 document.addEventListener('input',e=>{
