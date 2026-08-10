@@ -9101,7 +9101,7 @@
         "t": "Intro / first meeting",
         "o": "Introduce Global Living",
         "e": "Send Brochure",
-        "a": null,
+        "a": "Send Brochure",
         "n": ""
       },
       {
@@ -9114,7 +9114,7 @@
         "t": "Existing client meeting",
         "o": "Deal progression",
         "e": "Deal progression",
-        "a": null,
+        "a": "Proposals / Quotes Issuance",
         "n": ""
       },
       {
@@ -9246,11 +9246,50 @@
         "e": "Deal progression",
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2825977615",
+        "w": "2026-08-10",
+        "d": "2026-08-10",
+        "c": "Metropolitan Premium Properties",
+        "p": "Aqib Nadeem",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2825968297",
+        "w": "2026-08-10",
+        "d": "2026-08-10",
+        "c": "HThree",
+        "p": "Sanjeev Bagh",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Qualify opportunity",
+        "e": "Qualify opportunity",
+        "a": "Qualify opportunity",
+        "n": ""
+      },
+      {
+        "id": "2826086790",
+        "w": "2026-08-10",
+        "d": "2026-08-10",
+        "c": "Betterhomes",
+        "p": "LL c/o John",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Qualify opportunity",
+        "e": "Qualify opportunity",
+        "a": "Proposals / Quotes Issuance",
+        "n": ""
       }
     ],
     "dashboard": {
       "thisWeek": "2026-08-10",
-      "planTotal": 12,
+      "planTotal": 15,
       "planByType": [
         {
           "k": "Intro / first meeting",
@@ -9258,11 +9297,11 @@
         },
         {
           "k": "Existing client meeting",
-          "v": 5
+          "v": 7
         },
         {
           "k": "New client meeting",
-          "v": 2
+          "v": 3
         },
         {
           "k": "Event",
@@ -9288,7 +9327,7 @@
         },
         {
           "k": "Qualify opportunity",
-          "v": 3
+          "v": 5
         },
         {
           "k": "Deal progression",
