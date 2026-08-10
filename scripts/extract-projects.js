@@ -10,7 +10,7 @@
 // trend to actually accumulate — it reads its own prior output back in as a starting
 // point, so history survives across weekly syncs as long as the file stays in the repo.
 
-const fs = require('fs');
+import fs from 'fs';
 
 const BOARD_ID = 2062082517; // "Projects" board, Dubai Projects workspace
 const API_URL = 'https://api.monday.com/v2';
