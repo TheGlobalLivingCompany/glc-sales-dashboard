@@ -171,12 +171,12 @@ async function main() {
   // --- pipeline value history (accumulates one row per week) ---
   const active = records.filter(r => !CLOSED_STATUSES.includes(r.status));
   const pipelineValue = active.reduce((sum, r) => sum + (r.valueAED || 0), 0);
-  const weightedValue = active.reduce((sum, r) => sum + (r.weightedValueAED || 0), 0);
+  const weightedTotal = active.reduce((sum, r) => sum + (r.weightedValueAED || 0), 0);
   const week = mondayOfThisWeek();
 
   const history = loadExistingHistory();
   const existingIdx = history.findIndex(h => h.week === week);
-  const entry = { week, pipelineValue: Math.round(pipelineValue), weightedValue: Math.round(weightedValue) };
+  const entry = { week, pipelineValue: Math.round(pipelineValue), weightedValue: Math.round(weightedTotal) };
   if (existingIdx >= 0) history[existingIdx] = entry; // re-running the same week overwrites, doesn't duplicate
   else history.push(entry);
   history.sort((a, b) => a.week.localeCompare(b.week));
