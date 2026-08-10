@@ -35,12 +35,17 @@ const COLUMN_IDS = [
   'peopleimy12iev',  // Sales Lead
   'numeric_mkv28gp7',   // No. of Units
   'numeric_mkv1veyr',   // Value (AED) ex. VAT
-  'formula_mkv56f19',   // Weighted Pipeline Value (Value x status%)
   'date_mkw3jeyt',   // Quote Submission Date
   'date_mkwbcsc3',   // Confirmed Date
   'date_mkv88nfg',   // Install Start Date
   'date_mkvfap78',   // Completion Date
+  // NOTE: formula_mkv56f19 (Weighted Pipeline Value) is deliberately NOT in this
+  // list. Formula columns don't populate the normal text/value fields via the API
+  // — they silently return "" / null, which is what caused Weighted to show as
+  // AED 0 initially. It's fetched separately below via the display_value fragment
+  // that Monday.com requires for formula columns.
 ];
+const FORMULA_COLUMN_ID = 'formula_mkv56f19'; // Weighted Pipeline Value
 
 async function fetchAllItems() {
   const items = [];
@@ -61,6 +66,12 @@ async function fetchAllItems() {
                 id
                 text
                 value
+              }
+              weightedCol: column_values(ids: ["${FORMULA_COLUMN_ID}"]) {
+                ... on FormulaValue {
+                  id
+                  display_value
+                }
               }
             }
           }
@@ -102,6 +113,12 @@ function colDate(item, id) {
   const t = colText(item, id);
   return t && /^\d{4}-\d{2}-\d{2}/.test(t) ? t.slice(0, 10) : null;
 }
+function weightedValue(item) {
+  const cv = item.weightedCol && item.weightedCol[0];
+  if (!cv || cv.display_value == null || cv.display_value === '') return null;
+  const n = parseFloat(cv.display_value);
+  return Number.isFinite(n) ? n : null;
+}
 
 // Monday of the current week, UTC — matches the anchoring convention used by
 // the sales-meetings dashboard (TRACK_TO_WEEK), so both boards' weeks line up.
@@ -140,7 +157,7 @@ async function main() {
     salesLead: colText(it, 'peopleimy12iev'),
     units: colNum(it, 'numeric_mkv28gp7'),
     valueAED: colNum(it, 'numeric_mkv1veyr'),
-    weightedValueAED: colNum(it, 'formula_mkv56f19'),
+    weightedValueAED: weightedValue(it),
     quoteDate: colDate(it, 'date_mkw3jeyt'),
     confirmedDate: colDate(it, 'date_mkwbcsc3'),
     installDate: colDate(it, 'date_mkv88nfg'),
