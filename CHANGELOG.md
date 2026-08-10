@@ -250,3 +250,12 @@
 
 - Olle Kjellberg added Manish (Investor/End client cohort) to the pipeline for the week of August 10, 2026
 - David Ives has no changes this week
+
+## 2026-08-10
+
+- David Ives: no changes this week
+- Olle Kjellberg added three new opportunities: Metropolitan Premium Properties (Broker), HThree (Developer), and Betterhomes (Investor/End client)
+- Olle Kjellberg moved Metropolitan Premium Properties to "Send Brochure" stage
+- Olle Kjellberg moved H&H to "Proposals / Quotes Issuance" stage
+- Olle Kjellberg qualified HThree as an opportunity
+- Olle Kjellberg's total opportunities increased from 384 to 387
