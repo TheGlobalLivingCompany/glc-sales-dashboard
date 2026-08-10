@@ -236,3 +236,12 @@
 - Added one Investor/End client: Investor
 - Added one Other cohort client: GAA
 - Olle Kjellberg: no changes this week
+
+## 2026-08-10
+
+- David Ives added 2 new broker prospects: HomeX and APG
+- Olle Kjellberg added Nuvello Real Estate (Broker cohort)
+- Olle progressed AtkinsRealis and FÄM Real Estate to "Send Brochure"
+- Olle marked Omniyat as "Rescheduled"
+- Olle moved H&H to "Proposals / Quotes Issuance" stage
+- Olle pushed out follow-up dates on multiple Betterhomes items (by 7 days each) and similar delays for Metropolitan Premium Properties, H&H, and IGH Real Estate
