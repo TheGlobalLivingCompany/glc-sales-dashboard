@@ -245,3 +245,8 @@
 - Olle marked Omniyat as "Rescheduled"
 - Olle moved H&H to "Proposals / Quotes Issuance" stage
 - Olle pushed out follow-up dates on multiple Betterhomes items (by 7 days each) and similar delays for Metropolitan Premium Properties, H&H, and IGH Real Estate
+
+## 2026-08-10
+
+- Olle Kjellberg added Manish (Investor/End client cohort) to the pipeline for the week of August 10, 2026
+- David Ives has no changes this week
