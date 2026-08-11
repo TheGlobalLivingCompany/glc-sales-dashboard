@@ -141,6 +141,45 @@ function loadExistingHistory() {
   return [];
 }
 
+// Reads *last run's* projects-data.js, before we overwrite it, so this week's pull
+// can be diffed against it (new leads, status moves). Returns null on the very first
+// run (no prior file to diff against) rather than treating everything as "new".
+function loadPreviousRecords() {
+  try {
+    const raw = fs.readFileSync('projects-data.js', 'utf8');
+    const match = raw.match(/window\.GLC_PROJECTS\s*=\s*(\[[\s\S]*?\]);/);
+    if (match) return JSON.parse(match[1]);
+  } catch (e) {
+    // no prior snapshot — first run
+  }
+  return null;
+}
+
+// Compares this week's records against last week's snapshot and summarises what moved.
+// Capped defensively so an unusual week (e.g. a bulk import) can't bloat the history file.
+const DIFF_CAP = 40;
+function diffRecords(prevRecords, currentRecords) {
+  if (!prevRecords) return { baseline: true, newLeads: [], statusChanges: [] };
+  const prevById = new Map(prevRecords.map(r => [r.id, r]));
+  const newLeads = [];
+  const statusChanges = [];
+  for (const r of currentRecords) {
+    const prev = prevById.get(r.id);
+    if (!prev) {
+      newLeads.push({ id: r.id, name: r.name, client: r.client, salesLead: r.salesLead, valueAED: r.valueAED, status: r.status });
+    } else if (prev.status !== r.status) {
+      statusChanges.push({ id: r.id, name: r.name, salesLead: r.salesLead, valueAED: r.valueAED, fromStatus: prev.status, toStatus: r.status });
+    }
+  }
+  return {
+    baseline: false,
+    newLeads: newLeads.slice(0, DIFF_CAP),
+    newLeadsTotal: newLeads.length,
+    statusChanges: statusChanges.slice(0, DIFF_CAP),
+    statusChangesTotal: statusChanges.length,
+  };
+}
+
 async function main() {
   const items = await fetchAllItems();
 
@@ -165,8 +204,15 @@ async function main() {
     createdAt: it.created_at.slice(0, 10),
   }));
 
+  // diff against last run's snapshot BEFORE we overwrite it
+  const previousRecords = loadPreviousRecords();
+  const changes = diffRecords(previousRecords, records);
+
   fs.writeFileSync('projects-data.js', 'window.GLC_PROJECTS = ' + JSON.stringify(records) + ';\n');
   console.log(`Wrote ${records.length} project records to projects-data.js`);
+  console.log(changes.baseline
+    ? 'No prior snapshot to diff against — this run is the baseline.'
+    : `Diff vs last run: ${changes.newLeadsTotal} new lead(s), ${changes.statusChangesTotal} status change(s).`);
 
   // --- pipeline value history (accumulates one row per week) ---
   const active = records.filter(r => !CLOSED_STATUSES.includes(r.status));
@@ -176,7 +222,7 @@ async function main() {
 
   const history = loadExistingHistory();
   const existingIdx = history.findIndex(h => h.week === week);
-  const entry = { week, pipelineValue: Math.round(pipelineValue), weightedValue: Math.round(weightedTotal) };
+  const entry = { week, pipelineValue: Math.round(pipelineValue), weightedValue: Math.round(weightedTotal), changes };
   if (existingIdx >= 0) history[existingIdx] = entry; // re-running the same week overwrites, doesn't duplicate
   else history.push(entry);
   history.sort((a, b) => a.week.localeCompare(b.week));
