@@ -265,3 +265,9 @@
 - Olle Kjellberg added two new leads with Metropolitan Premium Properties this week—one in the Investor/End client cohort and one in the Broker cohort
 - Metropolitan Premium Properties Broker contact has been marked as a new lead created
 - David Ives had no changes this week
+
+## 2026-08-11
+
+- David Ives: no changes this week
+- Olle Kjellberg pushed out the Betterhomes delivery date by one day to 2026-08-11
+- Olle Kjellberg pushed out the Metropolitan Premium Properties delivery date to 2026-08-12, moving it two days later
