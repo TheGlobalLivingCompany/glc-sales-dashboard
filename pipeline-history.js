@@ -1,1 +1,1 @@
-window.GLC_PIPELINE_HISTORY = [{"week":"2026-08-10","pipelineValue":35938811,"weightedValue":4896308}];
+window.GLC_PIPELINE_HISTORY = [{"week":"2026-08-10","pipelineValue":35938811,"weightedValue":4896308,"changes":{"baseline":false,"newLeads":[],"newLeadsTotal":0,"statusChanges":[],"statusChangesTotal":0}}];
