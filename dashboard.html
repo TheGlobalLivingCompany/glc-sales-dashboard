@@ -433,11 +433,6 @@ html[data-theme="dark"] .daterange input{color-scheme:dark}
     </div>
   </div>
   <div class="card panel" style="margin-bottom:18px">
-    <div class="p-eyebrow">Forecast</div>
-    <div class="p-head"><div class="p-title">Next 6 weeks — projects with an install date</div></div>
-    <div id="projectsForecast"></div>
-  </div>
-  <div class="card panel" style="margin-bottom:18px">
     <div class="p-eyebrow">Buildings</div>
     <div class="p-head"><div class="p-title">Deep dive — City Tower 1 &amp; Allegro Residences</div></div>
     <div id="buildingPanel"></div>
@@ -1500,22 +1495,35 @@ function renderInstallsChart(){
   PROJECTS.forEach(p=>{
     if(!p.installDate || p.installDate<FY_START || p.status===LOST_STATUS) return;
     const key=p.installDate.slice(0,7);
-    byMonth[key]=byMonth[key]||{count:0,weighted:0,recs:[]};
-    byMonth[key].count++; byMonth[key].weighted+=(p.weightedValueAED||0); byMonth[key].recs.push(p);
+    byMonth[key]=byMonth[key]||{count:0,weighted:0,confirmed:0,recs:[]};
+    byMonth[key].count++;
+    byMonth[key].weighted+=(p.weightedValueAED||0);
+    if(p.status===WON_STATUS) byMonth[key].confirmed+=(p.valueAED||0);
+    byMonth[key].recs.push(p);
   });
   const months=Object.keys(byMonth).sort();
   if(!months.length){ $('#installsChart').innerHTML='<div class="p-note">No install dates logged for FY26 (Jun 2026 onwards) yet.</div>'; return; }
   const maxVal=Math.max(1,...months.map(m=>byMonth[m].weighted));
   const fmt=m=>{ const [y,mo]=m.split('-'); return new Date(+y,+mo-1,1).toLocaleDateString('en-GB',{month:'short',year:'2-digit'}); };
+  const bar=(label,val,color)=>`<div style="display:grid;grid-template-columns:78px 1fr 112px;align-items:center;gap:8px;margin-bottom:3px">
+    <span style="font-size:10.5px;color:var(--muted)">${label}</span>
+    <div style="height:9px;background:var(--paper);border-radius:6px;overflow:hidden"><div style="height:100%;border-radius:6px;width:${pct(val,maxVal)}%;background:${color}"></div></div>
+    <span style="font-size:11.5px;text-align:right;font-variant-numeric:tabular-nums">${fmtAED(val)}</span></div>`;
   $('#installsChart').innerHTML=months.map(m=>{
     const open=pState.instExpanded===m;
-    const bar=`<div class="hbar drill${open?' open':''}" data-instmonth="${m}">
-      <span class="nm"><span class="drill-chev">▸</span>${fmt(m)}</span>
-      <div class="track"><div class="fill" style="width:${pct(byMonth[m].weighted,maxVal)}%;background:var(--clay)"></div></div>
-      <span class="n">${fmtAED(byMonth[m].weighted)} <span style="color:var(--muted);font-weight:400;font-size:11px">(${byMonth[m].count})</span></span></div>`;
-    const panel=open?projectsDrillPanelHTML(byMonth[m].recs):'';
-    return bar+panel;
-  }).join('');
+    const d=byMonth[m];
+    const head=`<div class="drill${open?' open':''}" data-instmonth="${m}" style="padding:9px 0 8px;border-bottom:1px solid var(--line-2)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span class="drill-chev">▸</span><span style="font-weight:500;font-size:12.5px">${fmt(m)}</span>
+        <span style="margin-left:auto;color:var(--muted);font-size:11px">${d.count} project${d.count===1?'':'s'}</span>
+      </div>
+      ${bar('Confirmed',d.confirmed,'#175a63')}
+      ${bar('Weighted',d.weighted,'var(--clay)')}
+    </div>`;
+    const panel=open?projectsDrillPanelHTML(d.recs):'';
+    return head+panel;
+  }).join('')+
+    `<div class="legend" style="margin-top:10px"><span class="lg"><span class="sw" style="background:#175a63"></span>Confirmed — already won</span><span class="lg"><span class="sw" style="background:var(--clay)"></span>Weighted — full potential incl. confirmed</span></div>`;
 }
 function renderStageBars(){
   const order=['0%','25%','50%','75%','100%','Lost'];
@@ -1533,39 +1541,6 @@ function weekMonday(dateStr){
   const day=d.getDay(); const diff=day===0?-6:1-day;
   const m=new Date(d); m.setDate(m.getDate()+diff); m.setHours(0,0,0,0);
   return m;
-}
-function renderProjectsForecast(){
-  const today=new Date(); today.setHours(0,0,0,0);
-  const horizon=new Date(today); horizon.setDate(horizon.getDate()+42); // 6 weeks
-  const upcoming=PROJECTS.filter(p=>{ const d=parseD(p.installDate); return d && d>=today && d<=horizon; })
-    .sort((a,b)=>a.installDate.localeCompare(b.installDate));
-  if(!upcoming.length){
-    $('#projectsForecast').innerHTML='<div class="p-note">No projects with an install date in the next 6 weeks.</div>';
-    return;
-  }
-  const weeks={};
-  upcoming.forEach(p=>{
-    const mon=weekMonday(p.installDate);
-    const key=mon.toISOString().slice(0,10);
-    weeks[key]=weeks[key]||[];
-    weeks[key].push(p);
-  });
-  const weekKeys=Object.keys(weeks).sort();
-  const fmtWk=k=>{ const d=parseD(k); const end=new Date(d); end.setDate(end.getDate()+6);
-    return `${d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})} – ${end.toLocaleDateString('en-GB',{day:'2-digit',month:'short'})}`; };
-  $('#projectsForecast').innerHTML=weekKeys.map(k=>{
-    const items=weeks[k];
-    const total=items.reduce((s,p)=>s+(p.valueAED||0),0);
-    const rows=items.map(p=>`<div class="dp-row" style="grid-template-columns:1.6fr 1.2fr 70px 1fr">
-      <span style="font-weight:500">${p.name}</span>
-      <span style="color:var(--muted)">${p.building||p.location||'—'}</span>
-      <span>${p.status||'—'}</span>
-      <span>${fmtAED(p.valueAED)}</span></div>`).join('');
-    return `<div style="margin-bottom:14px">
-      <div class="p-note" style="font-weight:600;color:var(--ink);margin-bottom:4px">Week of ${fmtWk(k)} <span style="font-weight:400;color:var(--muted)">· ${items.length} project${items.length===1?'':'s'} · ${fmtAED(total)}</span></div>
-      <div class="dp-row h" style="grid-template-columns:1.6fr 1.2fr 70px 1fr"><span>Project</span><span>Building</span><span>Status</span><span>Value</span></div>
-      ${rows}</div>`;
-  }).join('');
 }
 function salesLeadNames(str){
   if(!str) return [];
@@ -1804,7 +1779,7 @@ function renderProjectsPage(){
     $('#pStage').innerHTML='<option value="">All stages</option>'+stages.map(s=>`<option value="${s}">${s}</option>`).join('');
     $('#pStage').dataset.built='1';
   }
-  renderProjectsKPIs(); renderPipelineTrend(); renderInstallsChart(); renderStageBars(); renderProjectsForecast(); renderSalesLeaderboard(); renderBuildingPanel(); renderProjectsTable();
+  renderProjectsKPIs(); renderPipelineTrend(); renderInstallsChart(); renderStageBars(); renderSalesLeaderboard(); renderBuildingPanel(); renderProjectsTable();
   $('#pFootnote').innerHTML=`Live preview · data read directly from the Monday.com "Projects" board. "Win rate" compares projects at 100% vs. Lost; projects still in progress aren't counted as decided yet.`;
 }
 document.addEventListener('input',e=>{
