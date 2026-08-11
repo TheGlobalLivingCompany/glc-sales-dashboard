@@ -1,1 +1,1 @@
-window.GLC_PIPELINE_HISTORY = [{"week":"2026-08-10","pipelineValue":35938811,"weightedValue":4958808,"changes":{"baseline":false,"newLeads":[],"newLeadsTotal":0,"statusChanges":[{"id":"2824581349","name":"One Za’abeel 2 bed Duplex","salesLead":"David Ives","valueAED":250000,"fromStatus":"0%","toStatus":"25%"}],"statusChangesTotal":1}}];
+window.GLC_PIPELINE_HISTORY = [{"week":"2026-08-10","pipelineValue":35938811,"weightedValue":4958808,"changes":{"baseline":false,"newLeads":[],"newLeadsTotal":0,"statusChanges":[],"statusChangesTotal":0}}];
