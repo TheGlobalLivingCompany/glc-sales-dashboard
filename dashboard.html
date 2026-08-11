@@ -1569,6 +1569,17 @@ function personTally(recs, dateField, keyFn){
   });
   return out;
 }
+function overlapStats(recs){
+  const shared=recs.filter(r=>salesLeadNames(r.salesLead).length>1);
+  const totalAppearances=recs.reduce((s,r)=>s+Math.max(1,salesLeadNames(r.salesLead).length),0);
+  return {sharedCount:shared.length, unique:recs.length, totalAppearances};
+}
+function overlapNote(recs, label){
+  const o=overlapStats(recs);
+  if(!o.sharedCount) return '';
+  const plural=(n,s)=>s+(n===1?'':'s');
+  return `<div class="p-note" style="margin-top:6px">⚠ ${o.sharedCount} ${plural(o.sharedCount,label)} ${o.sharedCount===1?'is':'are'} shared between multiple salespeople and counted once for each — ${o.unique} unique ${plural(o.unique,label)} in total, not ${o.totalAppearances}.</div>`;
+}
 function renderSalesLeaderboard(){
   const newTally=personTally(PROJECTS,'createdAt',pWeekKey);
   const confirmedRecs=PROJECTS.filter(p=>p.status==='75%'||p.status==='100%');
@@ -1591,6 +1602,8 @@ function renderSalesLeaderboard(){
   if(!rows.length){
     $('#salesLeaderboard').innerHTML='<div class="p-note">No new-lead or confirmed activity logged yet this week.</div>';
   } else {
+    const newRecsThisWeek=PROJECTS.filter(p=>p.createdAt && pWeekKey(p.createdAt)===curWk);
+    const confRecsThisWeek=confirmedRecs.filter(p=>p.confirmedDate && pWeekKey(p.confirmedDate)===curWk);
     $('#salesLeaderboard').innerHTML=rows.map(r=>{
       const newOpen=pState.newLbExpanded===r.name, confOpen=pState.confLbExpanded===r.name;
       const newPanel=newOpen?projectsDrillPanelHTML(r.curNew):'';
@@ -1611,7 +1624,10 @@ function renderSalesLeaderboard(){
         </div>
         ${newPanel}${confPanel}
       </div>`;
-    }).join('')+(confirmedNoDate?`<div class="p-note">${confirmedNoDate} confirmed lead(s) don't have a Confirmed Date logged, so they aren't counted in a specific week above.</div>`:'');
+    }).join('')
+      +overlapNote(newRecsThisWeek,'new lead')
+      +overlapNote(confRecsThisWeek,'confirmed lead')
+      +(confirmedNoDate?`<div class="p-note">${confirmedNoDate} confirmed lead(s) don't have a Confirmed Date logged, so they aren't counted in a specific week above.</div>`:'');
   }
 
   // monthly leaderboard — fun ranked view
@@ -1640,8 +1656,10 @@ function renderSalesLeaderboard(){
   const byConf=[...monthRows].sort((a,b)=>b.confRecs.length-a.confRecs.length).map(r=>({name:r.name,n:r.confRecs.length,recs:r.confRecs,key:'conf::'+r.name}));
   _monthLbRecs.clear();
   [...byNew,...byConf].forEach(r=>_monthLbRecs.set(r.key,r.recs));
-  $('#monthlyLeaderboardNew').innerHTML=lbList(byNew.filter(r=>r.n>0));
-  $('#monthlyLeaderboardConfirmed').innerHTML=lbList(byConf.filter(r=>r.n>0));
+  const newRecsThisMonth=PROJECTS.filter(p=>p.createdAt && pMonthKey(p.createdAt)===curMonth);
+  const confRecsThisMonth=confirmedRecs.filter(p=>p.confirmedDate && pMonthKey(p.confirmedDate)===curMonth);
+  $('#monthlyLeaderboardNew').innerHTML=lbList(byNew.filter(r=>r.n>0))+overlapNote(newRecsThisMonth,'new lead');
+  $('#monthlyLeaderboardConfirmed').innerHTML=lbList(byConf.filter(r=>r.n>0))+overlapNote(confRecsThisMonth,'confirmed lead');
   if(pState.mlbExpanded){
     const recs=_monthLbRecs.get(pState.mlbExpanded);
     if(recs){
