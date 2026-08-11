@@ -1447,8 +1447,10 @@ const pState = { search:'', stage:'', instExpanded:null, bldgExpanded:null, whyO
 const fmtAED = v => v==null ? '—' : 'AED ' + fmtN(Math.round(v));
 function pDays(a,b){ const d1=parseD(a), d2=parseD(b); if(!d1||!d2) return null; const d=Math.round((d2-d1)/86400000); return d>=0?d:null; }
 function pAvg(arr){ const a=arr.filter(v=>v!=null); return a.length ? Math.round(a.reduce((x,y)=>x+y,0)/a.length) : null; }
-function projectsDrillPanelHTML(recs){
-  const sorted=[...recs].sort((a,b)=>(b.installDate||b.createdAt||'').localeCompare(a.installDate||a.createdAt||''));
+const STATUS_ORDER={'100%':0,'75%':1,'50%':2,'25%':3,'0%':4,'Lost':5};
+function statusRank(s){ return STATUS_ORDER[s]??4.5; }
+function projectsDrillPanelHTML(recs, showTotal=false){
+  const sorted=[...recs].sort((a,b)=>statusRank(a.status)-statusRank(b.status) || (b.installDate||b.createdAt||'').localeCompare(a.installDate||a.createdAt||''));
   if(!sorted.length) return `<div class="drill-panel"><div class="dp-more">No projects found for this selection.</div></div>`;
   let g=`<div class="drill-panel"><div class="dp-row h" style="grid-template-columns:1.8fr 70px 1fr 1fr 1fr"><span>Project</span><span>Status</span><span>Client</span><span>Value</span><span>Weighted</span></div>`;
   g+=sorted.map(p=>`<div class="dp-row" style="grid-template-columns:1.8fr 70px 1fr 1fr 1fr">
@@ -1457,6 +1459,11 @@ function projectsDrillPanelHTML(recs){
     <span style="color:var(--muted)">${p.client||'—'}</span>
     <span>${fmtAED(p.valueAED)}</span>
     <span>${fmtAED(p.weightedValueAED)}</span></div>`).join('');
+  if(showTotal){
+    const total=sorted.reduce((s,p)=>s+(p.valueAED||0),0);
+    g+=`<div class="dp-row" style="grid-template-columns:1.8fr 70px 1fr 1fr 1fr;border-top:1px solid var(--line);font-weight:700">
+      <span>Total (${sorted.length} lead${sorted.length===1?'':'s'})</span><span></span><span></span><span>${fmtAED(total)}</span><span></span></div>`;
+  }
   g+='</div>';
   return g;
 }
@@ -1668,7 +1675,7 @@ function renderBuildingPanel(){
       <span class="num" style="font-weight:600">${r.n?r.wonPct+'%':'—'}</span>
       <span class="num" style="font-weight:600">${r.n?r.quotingPct+'%':'—'}</span>
       <span class="num" style="font-weight:600">${fmtAED(r.wonValue)} <span style="font-weight:400;color:var(--muted);font-size:11px">(${r.wonCount})</span></span></div>`;
-    const panel=open?projectsDrillPanelHTML(r.leads):'';
+    const panel=open?projectsDrillPanelHTML(r.leads,true):'';
     return row+panel;
   }).join('');
   $('#buildingPanel').innerHTML=g;
