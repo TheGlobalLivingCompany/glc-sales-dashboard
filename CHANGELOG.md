@@ -271,3 +271,14 @@
 - David Ives: no changes this week
 - Olle Kjellberg pushed out the Betterhomes delivery date by one day to 2026-08-11
 - Olle Kjellberg pushed out the Metropolitan Premium Properties delivery date to 2026-08-12, moving it two days later
+
+## 2026-08-17
+
+- David Ives added 13 new clients across brokers and developers this week, including McCone Properties, H&H, Berkeley Homes, and Arabian Estates
+- David Ives marked 6 existing opportunities as either in deal progression or rescheduled, including Underthedoormatt and Bentry Capital
+- David Ives updated HomeX with a brochure send action
+- David Ives's total client count grew from 317 to 330
+- Olle Kjellberg added 12 new clients this week, including Cindy Duke, Dave Nic, and multiple broker contacts like Betterhomes and Engel & Völker
+- Olle Kjellberg moved HThree from qualify opportunity to relationship advance
+- Olle Kjellberg advanced Amir Nawrachi from qualify opportunity to proposals/quotes issuance
+- Olle Kjellberg's total client count grew from 389 to 400
