@@ -822,14 +822,19 @@ function multiLineChart(series, lines, w=1160, h=240, yFmt=v=>v, tipFmt=null, du
     const y=v=>padT+ih-(v/lmax)*ih;
     const pts=series.map((s,i)=>[x(i),y(s.counts[l.k]||0)]);
     const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
-    const dots=pts.map((p,i)=>{
-      const raw=series[i].counts[l.k]||0;
-      return `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="${l.c}"/>
-        <circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="10" fill="transparent" style="cursor:pointer"><title>${l.k}: ${tf(raw)} · ${fmt(series[i].week)}</title></circle>`;
-    }).join('');
+    const dots=pts.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="${l.c}"/>`).join('');
     return `<path d="${d}" fill="none" stroke="${l.c}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>${dots}`;
   }).join('');
-  return `<svg viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="none" style="display:block">${grid}${paths}${labels}</svg>`;
+  // one combined hover zone per week (not per line) — when lines cross or sit close
+  // together, separate per-line hit-circles fight over which is on top and only the
+  // last-drawn one responds; a single full-height zone per week avoids that entirely
+  // and shows every line's value for that week in one tooltip.
+  const hoverW=n>1?Math.max(14,iw/(n-1)*0.9):24;
+  const hoverZones=series.map((s,i)=>{
+    const titleText=`${fmt(s.week)} — `+lines.map(l=>`${l.k}: ${tf(s.counts[l.k]||0)}`).join(' · ');
+    return `<rect x="${(x(i)-hoverW/2).toFixed(1)}" y="${padT}" width="${hoverW.toFixed(1)}" height="${ih}" fill="transparent" style="cursor:pointer"><title>${titleText}</title></rect>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="none" style="display:block">${grid}${paths}${labels}${hoverZones}</svg>`;
 }
 function renderCohortTrend(){
   const card=$('#cohortTrendCard');
