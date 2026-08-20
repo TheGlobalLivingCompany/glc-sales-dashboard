@@ -783,19 +783,33 @@ function cohortWeeklySeries(recs, from, to){
   recs.forEach(r=>{ if(r.w && tab[r.w]!==undefined && r.co){ tab[r.w][r.co]=(tab[r.w][r.co]||0)+1; }});
   return weeks.map(w=>({week:w, counts:tab[w]}));
 }
-function multiLineChart(series, lines, w=1160, h=240, yFmt=v=>v, tipFmt=null){
+function multiLineChart(series, lines, w=1160, h=240, yFmt=v=>v, tipFmt=null, dualAxis=false){
   if(!series.length) return '<div class="p-note">No data.</div>';
   const tf=tipFmt||yFmt;
-  const padL=26,padR=14,padT=16,padB=26, iw=w-padL-padR, ih=h-padT-padB;
+  const useDual=dualAxis && lines.length===2;
+  const padL=useDual?44:26, padR=useDual?44:14, padT=16,padB=26, iw=w-padL-padR, ih=h-padT-padB;
   const n=series.length;
-  const max=Math.max(1,...series.map(s=>Math.max(...lines.map(l=>s.counts[l.k]||0))));
   const x=i=>padL+(n===1?iw/2:i*iw/(n-1));
-  const y=v=>padT+ih-(v/max)*ih;
-  let grid='';
   const steps=4;
-  for(let g=0;g<=steps;g++){ const gy=padT+ih*g/steps; const gv=Math.round(max*(1-g/steps));
-    grid+=`<line x1="${padL}" y1="${gy}" x2="${w-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>
-    <text x="${padL-6}" y="${gy+3}" font-size="9.5" fill="var(--muted)" text-anchor="end">${yFmt(gv)}</text>`; }
+  let grid='';
+  let maxes;
+  if(useDual){
+    maxes=lines.map(l=>Math.max(1,...series.map(s=>s.counts[l.k]||0)));
+    for(let g=0;g<=steps;g++){
+      const gy=padT+ih*g/steps;
+      const gv0=Math.round(maxes[0]*(1-g/steps));
+      const gv1=Math.round(maxes[1]*(1-g/steps));
+      grid+=`<line x1="${padL}" y1="${gy}" x2="${w-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>
+      <text x="${padL-6}" y="${gy+3}" font-size="9.5" fill="${lines[0].c}" text-anchor="end">${yFmt(gv0)}</text>
+      <text x="${w-padR+6}" y="${gy+3}" font-size="9.5" fill="${lines[1].c}" text-anchor="start">${yFmt(gv1)}</text>`;
+    }
+  } else {
+    const max=Math.max(1,...series.map(s=>Math.max(...lines.map(l=>s.counts[l.k]||0))));
+    maxes=lines.map(()=>max);
+    for(let g=0;g<=steps;g++){ const gy=padT+ih*g/steps; const gv=Math.round(max*(1-g/steps));
+      grid+=`<line x1="${padL}" y1="${gy}" x2="${w-padR}" y2="${gy}" stroke="var(--line)" stroke-width="1"/>
+      <text x="${padL-6}" y="${gy+3}" font-size="9.5" fill="var(--muted)" text-anchor="end">${yFmt(gv)}</text>`; }
+  }
   // x labels at ~3-month increments: first, +3 months, last
   const fmt=s=>parseD(s).toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
   const labIdx=[0, Math.round((n-1)/2), n-1].filter((v,i,a)=>a.indexOf(v)===i);
@@ -803,7 +817,9 @@ function multiLineChart(series, lines, w=1160, h=240, yFmt=v=>v, tipFmt=null){
     const anc=i===0?'start':(i===n-1?'end':'middle');
     return `<text x="${x(i).toFixed(1)}" y="${h-7}" font-size="10" fill="var(--muted)" text-anchor="${anc}">${fmt(series[i].week)}</text>`;
   }).join('');
-  const paths=lines.map(l=>{
+  const paths=lines.map((l,li)=>{
+    const lmax=maxes[li];
+    const y=v=>padT+ih-(v/lmax)*ih;
     const pts=series.map((s,i)=>[x(i),y(s.counts[l.k]||0)]);
     const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
     const dots=pts.map((p,i)=>{
@@ -1449,20 +1465,27 @@ function pDays(a,b){ const d1=parseD(a), d2=parseD(b); if(!d1||!d2) return null;
 function pAvg(arr){ const a=arr.filter(v=>v!=null); return a.length ? Math.round(a.reduce((x,y)=>x+y,0)/a.length) : null; }
 const STATUS_ORDER={'100%':0,'75%':1,'50%':2,'25%':3,'0%':4,'Lost':5};
 function statusRank(s){ return STATUS_ORDER[s]??4.5; }
-function projectsDrillPanelHTML(recs, showTotal=false){
+function projectsDrillPanelHTML(recs, showTotal=false, cashMonth=null){
   const sorted=[...recs].sort((a,b)=>statusRank(a.status)-statusRank(b.status) || (b.installDate||b.createdAt||'').localeCompare(a.installDate||a.createdAt||''));
   if(!sorted.length) return `<div class="drill-panel"><div class="dp-more">No projects found for this selection.</div></div>`;
-  let g=`<div class="drill-panel"><div class="dp-row h" style="grid-template-columns:1.8fr 70px 1fr 1fr 1fr"><span>Project</span><span>Status</span><span>Client</span><span>Value</span><span>Weighted</span></div>`;
-  g+=sorted.map(p=>`<div class="dp-row" style="grid-template-columns:1.8fr 70px 1fr 1fr 1fr">
+  const cols=cashMonth?'1.5fr 60px 60px 1fr 1fr 1fr':'1.8fr 70px 1fr 1fr 1fr';
+  const cashHead=cashMonth?'<span>Cash in</span>':'';
+  let g=`<div class="drill-panel"><div class="dp-row h" style="grid-template-columns:${cols}"><span>Project</span><span>Status</span>${cashHead}<span>Client</span><span>Value</span><span>Weighted</span></div>`;
+  g+=sorted.map(p=>{
+    const cashCell=cashMonth?`<span style="font-weight:700;color:${hasCashInMonth(p,cashMonth)?'#037f4c':'var(--line)'}">${hasCashInMonth(p,cashMonth)?'Y':'—'}</span>`:'';
+    return `<div class="dp-row" style="grid-template-columns:${cols}">
     <span style="font-weight:500">${p.name||'—'}</span>
     <span>${p.status||'—'}</span>
+    ${cashCell}
     <span style="color:var(--muted)">${p.client||'—'}</span>
     <span>${fmtAED(p.valueAED)}</span>
-    <span>${fmtAED(p.weightedValueAED)}</span></div>`).join('');
+    <span>${fmtAED(p.weightedValueAED)}</span></div>`;
+  }).join('');
   if(showTotal){
     const total=sorted.reduce((s,p)=>s+(p.valueAED||0),0);
-    g+=`<div class="dp-row" style="grid-template-columns:1.8fr 70px 1fr 1fr 1fr;border-top:1px solid var(--line);font-weight:700">
-      <span>Total (${sorted.length} lead${sorted.length===1?'':'s'})</span><span></span><span></span><span>${fmtAED(total)}</span><span></span></div>`;
+    const totalCashCell=cashMonth?'<span></span>':'';
+    g+=`<div class="dp-row" style="grid-template-columns:${cols};border-top:1px solid var(--line);font-weight:700">
+      <span>Total (${sorted.length} lead${sorted.length===1?'':'s'})</span><span></span>${totalCashCell}<span></span><span>${fmtAED(total)}</span><span></span></div>`;
   }
   g+='</div>';
   return g;
@@ -1510,16 +1533,29 @@ function cashReceivedByMonth(){
   });
   return byMonth;
 }
+function hasCashInMonth(p, monthKey){
+  return [p.depositDateReceived, p.invoice2DateReceived, p.invoice3DateReceived].some(d=>d && d.slice(0,7)===monthKey);
+}
 function renderInstallsChart(){
   const byMonth={};
   PROJECTS.forEach(p=>{
     if(!p.installDate || p.installDate<FY_START || p.status===LOST_STATUS) return;
     const key=p.installDate.slice(0,7);
-    byMonth[key]=byMonth[key]||{count:0,weighted:0,confirmed:0,recs:[]};
+    byMonth[key]=byMonth[key]||{count:0,weighted:0,confirmed:0,recs:new Map()};
     byMonth[key].count++;
     byMonth[key].weighted+=(p.weightedValueAED||0);
     if(p.status===WON_STATUS) byMonth[key].confirmed+=(p.valueAED||0);
-    byMonth[key].recs.push(p);
+    byMonth[key].recs.set(p.id,p);
+  });
+  // pull in cash-only contributors too, so the dropdown can show what's actually
+  // making up that month's Cash In figure even when the install itself is elsewhere
+  PROJECTS.forEach(p=>{
+    ['depositDateReceived','invoice2DateReceived','invoice3DateReceived'].forEach(f=>{
+      const d=p[f]; if(!d || d<FY_START) return;
+      const key=d.slice(0,7);
+      byMonth[key]=byMonth[key]||{count:0,weighted:0,confirmed:0,recs:new Map()};
+      if(!byMonth[key].recs.has(p.id)) byMonth[key].recs.set(p.id,p);
+    });
   });
   const cashByMonth=cashReceivedByMonth();
   const months=[...new Set([...Object.keys(byMonth),...Object.keys(cashByMonth)])].sort();
@@ -1533,7 +1569,7 @@ function renderInstallsChart(){
     <span style="font-size:11.5px;text-align:right;font-variant-numeric:tabular-nums">${fmtAED(val)}</span></div>`;
   $('#installsChart').innerHTML=months.map(m=>{
     const open=pState.instExpanded===m;
-    const d=byMonth[m]||{count:0,weighted:0,confirmed:0,recs:[]};
+    const d=byMonth[m]||{count:0,weighted:0,confirmed:0,recs:new Map()};
     const cash=cashByMonth[m]||0;
     const head=`<div class="drill${open?' open':''}" data-instmonth="${m}" style="padding:9px 0 8px;border-bottom:1px solid var(--line-2)">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
@@ -1544,7 +1580,7 @@ function renderInstallsChart(){
       ${bar('Weighted',d.weighted,'var(--clay)',maxVal)}
       ${bar('Cash in',cash,'#037f4c',maxCash)}
     </div>`;
-    const panel=open?projectsDrillPanelHTML(d.recs):'';
+    const panel=open?projectsDrillPanelHTML([...d.recs.values()],false,m):'';
     return head+panel;
   }).join('')+
     `<div class="legend" style="margin-top:10px"><span class="lg"><span class="sw" style="background:#175a63"></span>Confirmed — already won</span><span class="lg"><span class="sw" style="background:var(--clay)"></span>Weighted — full potential incl. confirmed</span><span class="lg"><span class="sw" style="background:#037f4c"></span>Cash in — actually received that month (deposit/2nd/3rd invoice), regardless of install date</span></div>`;
@@ -1752,7 +1788,7 @@ function renderPipelineTrend(){
   const series=sorted.map(h=>({week:h.week,counts:{Pipeline:h.pipelineValue||0,Weighted:h.weightedValue||0}}));
   const lines=[{k:'Pipeline',c:'#175a63'},{k:'Weighted',c:'#fdab3d'}];
   const abbrev=v=>v>=1e6?(v/1e6).toFixed(1)+'M':v>=1e3?Math.round(v/1e3)+'K':fmtN(Math.round(v));
-  $('#pipelineTrend').innerHTML=multiLineChart(series,lines,1160,220,abbrev,v=>fmtAED(v));
+  $('#pipelineTrend').innerHTML=multiLineChart(series,lines,1160,220,abbrev,v=>fmtAED(v),true);
   $('#pipelineTrendLegend').innerHTML=lines.map(l=>{
     const latest=series[series.length-1].counts[l.k]||0;
     return `<span class="lg"><span class="sw" style="background:${l.c}"></span>${l.k} <span class="val">${fmtAED(latest)}</span></span>`;
