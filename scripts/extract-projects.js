@@ -231,9 +231,19 @@ async function main() {
 
   const history = loadExistingHistory();
   const existingIdx = history.findIndex(h => h.week === week);
+  const hasNewInfo = changes.baseline || changes.newLeads.length > 0 || changes.statusChanges.length > 0;
   const entry = { week, pipelineValue: Math.round(pipelineValue), weightedValue: Math.round(weightedTotal), changes };
-  if (existingIdx >= 0) history[existingIdx] = entry; // re-running the same week overwrites, doesn't duplicate
-  else history.push(entry);
+  if (existingIdx >= 0) {
+    const prevEntry = history[existingIdx];
+    const prevHadInfo = prevEntry.changes && (prevEntry.changes.newLeads.length > 0 || prevEntry.changes.statusChanges.length > 0);
+    // A same-week rerun (e.g. testing the workflow twice) diffs against the snapshot
+    // from just minutes ago, so it usually comes back empty — don't let that empty
+    // diff erase a real "why did it move" summary already captured earlier this week.
+    entry.changes = (!hasNewInfo && prevHadInfo) ? prevEntry.changes : changes;
+    history[existingIdx] = entry;
+  } else {
+    history.push(entry); // first time seeing this week — always keep whatever it found
+  }
   history.sort((a, b) => a.week.localeCompare(b.week));
 
   fs.writeFileSync('pipeline-history.js', 'window.GLC_PIPELINE_HISTORY = ' + JSON.stringify(history) + ';\n');
