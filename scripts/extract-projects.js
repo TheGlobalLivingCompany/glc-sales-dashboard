@@ -39,6 +39,12 @@ const COLUMN_IDS = [
   'date_mkwbcsc3',   // Confirmed Date
   'date_mkv88nfg',   // Install Start Date
   'date_mkvfap78',   // Completion Date
+  // Payment tranches — each is a (status, value, date received) triple. Date
+  // Received is the actual "cash landed" date, independent of Install Start Date —
+  // a deposit can be paid months before or after the install itself.
+  'color_mkvmz30k', 'numeric_mkvmc2n5', 'date_mm6bx7zs',   // Deposit Invoice
+  'color_mkvmdvxs', 'numeric_mkvm9dz8', 'date_mm6b9rw',    // 2nd Invoice
+  'color_mkvmsp23', 'numeric_mkvmqfjf', 'date_mm6bfh7m',   // 3rd Invoice
   // NOTE: formula_mkv56f19 (Weighted Pipeline Value) is deliberately NOT in this
   // list. Formula columns don't populate the normal text/value fields via the API
   // — they silently return "" / null, which is what caused Weighted to show as
@@ -201,6 +207,9 @@ async function main() {
     confirmedDate: colDate(it, 'date_mkwbcsc3'),
     installDate: colDate(it, 'date_mkv88nfg'),
     completionDate: colDate(it, 'date_mkvfap78'),
+    depositStatus: colText(it, 'color_mkvmz30k'), depositValue: colNum(it, 'numeric_mkvmc2n5'), depositDateReceived: colDate(it, 'date_mm6bx7zs'),
+    invoice2Status: colText(it, 'color_mkvmdvxs'), invoice2Value: colNum(it, 'numeric_mkvm9dz8'), invoice2DateReceived: colDate(it, 'date_mm6b9rw'),
+    invoice3Status: colText(it, 'color_mkvmsp23'), invoice3Value: colNum(it, 'numeric_mkvmqfjf'), invoice3DateReceived: colDate(it, 'date_mm6bfh7m'),
     createdAt: it.created_at.slice(0, 10),
   }));
 
