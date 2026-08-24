@@ -282,3 +282,24 @@
 - Olle Kjellberg moved HThree from qualify opportunity to relationship advance
 - Olle Kjellberg advanced Amir Nawrachi from qualify opportunity to proposals/quotes issuance
 - Olle Kjellberg's total client count grew from 389 to 400
+
+## 2026-08-24
+
+**David Ives**
+
+- Added 16 new client entries across the week, including multiple brokers (Arettea & Co, Alesco, Invicta, Luxury Property, Oxo) and developers (Arada, Knight Dragon, Leos)
+- Progressed deals with McCone Properties and H&H into deal progression stage
+- Created new lead with Investor - City Tower
+- Rescheduled meetings with Bk Real Estate (two separate entries), API, and White & Co
+- Updated no5 meeting date from August 21 to August 24
+- Total pipeline grew from 330 to 346 entries
+
+**Olle Kjellberg**
+
+- Added 13 new client entries, with strong broker focus including multiple Betterhomes entries, Penthouse, Nuvello Real Estate, Engel & Völker, and Espace
+- Moved Engel & Völker into deal progression
+- Advanced Dave Nic to proposals/quotes issuance stage
+- Sent brochures to Metropolitan Premium Properties, Mira International, and White & Co
+- Qualified opportunities with Betterhomes and EXP Realty
+- Rescheduled with Cindy Duke
+- Total pipeline grew from 400 to 413 entries
