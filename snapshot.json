@@ -4499,11 +4499,24 @@
         "e": "Proposals / Quotes Issuance",
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2843573331",
+        "w": "2026-08-24",
+        "d": "2026-08-24",
+        "c": "Investor - City Tower",
+        "p": "Abeer",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Qualify opportunity",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
       "thisWeek": "2026-08-24",
-      "planTotal": 17,
+      "planTotal": 18,
       "planByType": [
         {
           "k": "Intro / first meeting",
@@ -4515,7 +4528,7 @@
         },
         {
           "k": "New client meeting",
-          "v": 1
+          "v": 2
         },
         {
           "k": "Event",
@@ -4561,7 +4574,7 @@
         },
         {
           "k": "Send Brochure",
-          "v": 2
+          "v": 3
         },
         {
           "k": "Send Referral Agreement",
