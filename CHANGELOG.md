@@ -303,3 +303,8 @@
 - Qualified opportunities with Betterhomes and EXP Realty
 - Rescheduled with Cindy Duke
 - Total pipeline grew from 400 to 413 entries
+
+## 2026-08-24
+
+- David Ives added Investor - City Tower (Investor/End client cohort) this week
+- Olle Kjellberg has no changes this week
