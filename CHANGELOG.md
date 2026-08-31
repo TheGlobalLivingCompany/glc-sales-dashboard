@@ -308,3 +308,13 @@
 
 - David Ives added Investor - City Tower (Investor/End client cohort) this week
 - Olle Kjellberg has no changes this week
+
+## 2026-08-31
+
+- David Ives added 7 new entries across Developer, Investor/End client, and Broker cohorts (Leos, Arada, Investor - City Tower, Provident, Driven, Luxury Property)
+- David Ives rescheduled meetings with Luxury Property and Leos
+- Olle Kjellberg added 9 new entries, heavily concentrated in Broker cohort with multiple Betterhomes entries, plus Investor/End client contacts (Amico, The Pad)
+- Olle Kjellberg moved H&H and Maeva to qualify opportunity stage
+- Olle Kjellberg progressed Nuvello Real Estate and Thomas to deal progression
+- Olle Kjellberg scheduled brochure sends for Penthouse and Espace
+- Olle Kjellberg rescheduled meetings with Betterhomes, LLoyd Manokore, and Networking Event
