@@ -327,3 +327,15 @@
 - Olle moved a Betterhomes opportunity from "New lead created" to "Qualify opportunity" and marked two other Betterhomes entries for "Send Brochure."
 - Olle rescheduled a Betterhomes entry.
 - Olle updated The Pad from "New lead created" status and shifted its date from September 2 to September 3.
+
+## 2026-09-14
+
+- David Ives added 14 new items across multiple clients, with strong focus on Investor - City Tower (5 items) and brokers H&H and Betterhomes
+- David Ives moved Orascom developments, Invespy, and Lend Ease to Rescheduled status
+- David Ives qualified Black Brick as an opportunity
+- David Ives' total items increased from 371 to 385
+- Olle Kjellberg added 20 new items this week, with heavy activity across broker clients including Betterhomes (6 items), Betterhomes AD (2 items), and PSI (2 items)
+- Olle Kjellberg progressed deals with LuxuryProperty.com, Betterhomes, and Penthouse
+- Olle Kjellberg sent brochures to 4 Direction, Espace (2 items), and moved brochure sends to Betterhomes
+- Olle Kjellberg created a new lead with Betterhomes and moved Investor City Tower 1 to Proposals/Quotes Issuance stage
+- Olle Kjellberg's total items increased from 437 to 456
