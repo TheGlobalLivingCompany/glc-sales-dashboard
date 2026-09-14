@@ -339,3 +339,9 @@
 - Olle Kjellberg sent brochures to 4 Direction, Espace (2 items), and moved brochure sends to Betterhomes
 - Olle Kjellberg created a new lead with Betterhomes and moved Investor City Tower 1 to Proposals/Quotes Issuance stage
 - Olle Kjellberg's total items increased from 437 to 456
+
+## 2026-09-14
+
+- Olle Kjellberg updated 4 Direction's cohort from Broker to Developer
+- Olle Kjellberg moved 4 Direction's date from September 15 to September 24, 2026
+- David Ives has no changes this week
