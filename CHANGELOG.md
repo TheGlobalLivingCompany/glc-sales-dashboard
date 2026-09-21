@@ -345,3 +345,14 @@
 - Olle Kjellberg updated 4 Direction's cohort from Broker to Developer
 - Olle Kjellberg moved 4 Direction's date from September 15 to September 24, 2026
 - David Ives has no changes this week
+
+## 2026-09-21
+
+- David Ives' pipeline grew from 385 to 399 items. Added 14 new entries across Investor - City Tower, H&H, Betterhomes, Di Salvo Realty, Luxury Invest, Arada, and White & Co.
+- Multiple Investor - City Tower opportunities with David moved into deal progression and proposals/quotes stages, with one rescheduled.
+- David advanced H&H and Betterhomes relationships, with H&H also moving to proposals/quotes issuance.
+- David introduced Global Living to several Investor - City Tower prospects and initiated relationship advances with API and Lend Ease.
+- Olle Kjellberg's pipeline grew from 456 to 474 items. Added 18 new entries including multiple Betterhomes contacts, End Client, White & Co, Crompton Partners, and others.
+- Olle progressed Betterhomes and Investor City Tower opportunities into proposals/quotes and qualification stages.
+- Olle moved Betterhomes AD from qualify opportunity to relationship advance and rescheduled items with Crompton Partners and Makani Real Estate.
+- Olle sent brochures to Pangea, ALAIN, PSI, and Sorento Real Estate.

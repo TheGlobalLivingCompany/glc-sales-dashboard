@@ -1,1 +1,1 @@
-window.GLC_REMINDERS = {"generated":"2026-09-14T12:38:35.473Z","items":[{"id":"2770564502","person":"Olle Kjellberg","client":"Betterhomes","date":"2026-07-07","text":"Schedule meeting with Marcus and Rupert next week about Global Living visibility and presentation."}]};
+window.GLC_REMINDERS = {"generated":"2026-09-21T06:16:36.332Z","items":[{"id":"2770564502","person":"Olle Kjellberg","client":"Betterhomes","date":"2026-07-07","text":"Schedule meeting with Marcus and Rupert to discuss Global Living visibility and introduction week presentation."}]};
