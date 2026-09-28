@@ -367,3 +367,8 @@
 - Olle sent brochures to White & Co, First Class Property Management, Mira International, haart Estate Agents, and Stay Group.
 - Olle rescheduled meetings with Allsopp & Allsopp and one Betterhomes contact.
 - Olle adjusted follow-up dates for 4 Direction and End Client entries, moving them to the week of October 1st.
+
+## 2026-09-28
+
+- David Ives: no changes this week
+- Olle Kjellberg moved the LANGE delivery date from October 2 to October 6, 2026
