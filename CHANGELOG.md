@@ -356,3 +356,14 @@
 - Olle progressed Betterhomes and Investor City Tower opportunities into proposals/quotes and qualification stages.
 - Olle moved Betterhomes AD from qualify opportunity to relationship advance and rescheduled items with Crompton Partners and Makani Real Estate.
 - Olle sent brochures to Pangea, ALAIN, PSI, and Sorento Real Estate.
+
+## 2026-09-28
+
+- David Ives added 12 new entries this week, bringing total from 399 to 411. Most additions are Investor/End client cohort contacts at Investor - City Tower, plus new broker contacts including Betterhomes, APG, Di Salvo Realty, Driven, and Cityzen, and developer contact Berkeley.
+- Olle Kjellberg grew from 474 to 492 total entries with 17 new additions across brokers (Betterhomes, Huspy, Holo, haus & haus, Crompton Partners, Espace Real Estate), developers (Mira International, Mr. Eight Development), and investor/end client contacts (End Client, White & Co).
+- Olle moved City Tower from a new client meeting to a site/showroom visit, advancing the relationship.
+- Olle progressed Betterhomes entries through the pipeline, including moving one to Proposals/Quotes Issuance stage.
+- Olle added Proposals/Quotes Issuance actions for End Client contacts and West One.
+- Olle sent brochures to White & Co, First Class Property Management, Mira International, haart Estate Agents, and Stay Group.
+- Olle rescheduled meetings with Allsopp & Allsopp and one Betterhomes contact.
+- Olle adjusted follow-up dates for 4 Direction and End Client entries, moving them to the week of October 1st.
