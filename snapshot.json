@@ -11848,19 +11848,6 @@
         "n": ""
       },
       {
-        "id": "2868728977",
-        "w": "2026-09-28",
-        "d": "2026-10-02",
-        "c": "LANGE",
-        "p": "TIzian Lange",
-        "co": "Other",
-        "t": "Intro / first meeting",
-        "o": "Introduce Global Living",
-        "e": "Send Brochure",
-        "a": null,
-        "n": ""
-      },
-      {
         "id": "2865094886",
         "w": "2026-10-05",
         "d": "2026-10-05",
@@ -11872,15 +11859,28 @@
         "e": "Send Brochure",
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2868728977",
+        "w": "2026-10-05",
+        "d": "2026-10-06",
+        "c": "LANGE",
+        "p": "TIzian Lange",
+        "co": "Other",
+        "t": "Intro / first meeting",
+        "o": "Introduce Global Living",
+        "e": "Send Brochure",
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
       "thisWeek": "2026-10-05",
-      "planTotal": 1,
+      "planTotal": 2,
       "planByType": [
         {
           "k": "Intro / first meeting",
-          "v": 1
+          "v": 2
         },
         {
           "k": "Existing client meeting",
@@ -11934,7 +11934,7 @@
         },
         {
           "k": "Send Brochure",
-          "v": 1
+          "v": 2
         },
         {
           "k": "Send Referral Agreement",
@@ -11943,7 +11943,7 @@
       ],
       "lastWeek": "2026-09-28",
       "lastWeekTotalActual": 0,
-      "lastWeekTotalTarget": 18,
+      "lastWeekTotalTarget": 17,
       "lastWeekOutcomes": [
         {
           "k": "Introduce Global Living",
@@ -11989,9 +11989,9 @@
         },
         {
           "k": "Send Brochure",
-          "t": 9,
+          "t": 8,
           "a": 0,
-          "v": -9
+          "v": -8
         },
         {
           "k": "Send Referral Agreement",
