@@ -372,3 +372,13 @@
 
 - David Ives: no changes this week
 - Olle Kjellberg moved the LANGE delivery date from October 2 to October 6, 2026
+
+## 2026-10-05
+
+- David Ives added 9 entries this week, bringing total from 411 to 420. Most additions are for Investor/End client cohort clients including multiple entries for Investor - City Tower.
+- Olle Kjellberg added 8 entries this week, bringing total from 492 to 500. Added multiple End Client entries in the Investor/End client cohort and multiple Betterhomes entries in the Broker cohort.
+- Olle progressed deals with Betterhomes (3 entries moved to Deal progression), End Client (2 entries moved to Proposals / Quotes Issuance), and Crompton Partners (moved to Deal progression).
+- Olle sent brochures to fäm Properties and Aaronz & Co. Real Estate.
+- Olle rescheduled meetings with Holo and Mira International.
+- Olle qualified a new opportunity with 4 Direction.
+- Olle pushed out follow-up dates for 6 clients: Huspy, haus & haus, Espace Real Estate, LANGE, White & Co, and End Client (dates shifted by 6-7 days).
