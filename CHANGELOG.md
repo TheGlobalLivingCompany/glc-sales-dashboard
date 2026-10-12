@@ -382,3 +382,12 @@
 - Olle rescheduled meetings with Holo and Mira International.
 - Olle qualified a new opportunity with 4 Direction.
 - Olle pushed out follow-up dates for 6 clients: Huspy, haus & haus, Espace Real Estate, LANGE, White & Co, and End Client (dates shifted by 6-7 days).
+
+## 2026-10-12
+
+- Olle Kjellberg updated 11 opportunities across multiple clients this week
+- Three opportunities with End Client moved to deal progression and opportunity qualification stages
+- Four opportunities were rescheduled: Huspy, haus & haus, Espace Real Estate, and White & Co
+- Betterhomes opportunity advanced to proposals/quotes issuance stage
+- Mr. Eight Development and LANGE both had brochures sent
+- David Ives has no changes this week
