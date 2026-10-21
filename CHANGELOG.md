@@ -391,3 +391,9 @@
 - Betterhomes opportunity advanced to proposals/quotes issuance stage
 - Mr. Eight Development and LANGE both had brochures sent
 - David Ives has no changes this week
+
+## 2026-10-21
+
+- David Ives added 11 new entries for the week of October 19, primarily with Investor - City Tower (Investor/End client cohort) and also picked up activity with Betterhomes and Vogue (both Broker cohort) and a general Investor contact
+- David Ives updated Di Salvo Realty, classifying them as a Broker cohort, logging an existing client meeting focused on relationship advancement
+- Olle Kjellberg has no changes this week
