@@ -5453,19 +5453,162 @@
         "id": "2873236229",
         "w": "2026-10-05",
         "d": "2026-10-06",
-        "c": null,
-        "p": null,
-        "co": null,
-        "t": null,
-        "o": null,
+        "c": "Di Salvo Realty",
+        "p": "Juan Di Salvo",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
         "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885432090",
+        "w": "2026-10-19",
+        "d": "2026-10-19",
+        "c": "Investor - City Tower",
+        "p": "Prashant Malaviya",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885436849",
+        "w": "2026-10-19",
+        "d": "2026-10-20",
+        "c": "Investor - City Tower",
+        "p": "Carolyn Tunbell",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885436852",
+        "w": "2026-10-19",
+        "d": "2026-10-20",
+        "c": "Investor - City Tower",
+        "p": "Mark Coffey",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885443816",
+        "w": "2026-10-19",
+        "d": "2026-10-20",
+        "c": "Investor - City Tower",
+        "p": "Emiliana",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Introduce Global Living",
+        "e": "Proposals / Quotes Issuance",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885432131",
+        "w": "2026-10-19",
+        "d": "2026-10-20",
+        "c": "Investor - City Tower",
+        "p": "Gregory",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885436856",
+        "w": "2026-10-19",
+        "d": "2026-10-20",
+        "c": "Betterhomes",
+        "p": "Loughlin",
+        "co": "Broker",
+        "t": "New client meeting",
+        "o": "Qualify opportunity",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885436858",
+        "w": "2026-10-19",
+        "d": "2026-10-21",
+        "c": "Investor - City Tower",
+        "p": "Martin Blechta",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Introduce Global Living",
+        "e": "Proposals / Quotes Issuance",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885465904",
+        "w": "2026-10-19",
+        "d": "2026-10-20",
+        "c": "Vogue",
+        "p": "Karim Aldelhamid",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885432224",
+        "w": "2026-10-19",
+        "d": "2026-10-21",
+        "c": "Investor",
+        "p": "Laura -UK",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Proposals / Presentation",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885449268",
+        "w": "2026-10-19",
+        "d": "2026-10-21",
+        "c": "Investor",
+        "p": "Abdulla Janahi",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": "Deal progression",
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2885444923",
+        "w": "2026-10-19",
+        "d": "2026-10-22",
+        "c": "Investor - City Tower",
+        "p": "Zenobia",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Qualify opportunity",
+        "e": "Proposals / Quotes Issuance",
         "a": null,
         "n": ""
       }
     ],
     "dashboard": {
-      "thisWeek": "2026-10-05",
-      "planTotal": 9,
+      "thisWeek": "2026-10-19",
+      "planTotal": 11,
       "planByType": [
         {
           "k": "Intro / first meeting",
@@ -5473,7 +5616,7 @@
         },
         {
           "k": "Existing client meeting",
-          "v": 3
+          "v": 6
         },
         {
           "k": "New client meeting",
@@ -5507,7 +5650,7 @@
         },
         {
           "k": "Deal progression",
-          "v": 0
+          "v": 5
         },
         {
           "k": "Proposals / Presentation",
@@ -5515,7 +5658,7 @@
         },
         {
           "k": "Proposals / Quotes Issuance",
-          "v": 0
+          "v": 3
         },
         {
           "k": "New lead created",
@@ -5530,9 +5673,9 @@
           "v": 0
         }
       ],
-      "lastWeek": "2026-09-28",
+      "lastWeek": "2026-10-05",
       "lastWeekTotalActual": 0,
-      "lastWeekTotalTarget": 12,
+      "lastWeekTotalTarget": 9,
       "lastWeekOutcomes": [
         {
           "k": "Introduce Global Living",
