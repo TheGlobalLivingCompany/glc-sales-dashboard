@@ -5604,10 +5604,153 @@
         "e": "Proposals / Quotes Issuance",
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2891200325",
+        "w": "2026-10-26",
+        "d": "2026-10-26",
+        "c": "Investor",
+        "p": "Abdulla Janahi",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891204669",
+        "w": "2026-10-26",
+        "d": "2026-10-26",
+        "c": "Investor - City Tower",
+        "p": "Zenobia",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Proposals / Presentation",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891212516",
+        "w": "2026-10-26",
+        "d": "2026-10-27",
+        "c": "Investor - City Tower",
+        "p": "Martin Blechta",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Proposals / Presentation",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891246692",
+        "w": "2026-10-26",
+        "d": "2026-10-27",
+        "c": "Investor - City Tower",
+        "p": "Prashant Malaviya",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891212121",
+        "w": "2026-10-26",
+        "d": "2026-10-27",
+        "c": "Investor - City Tower",
+        "p": "Abeer",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891247125",
+        "w": "2026-10-26",
+        "d": "2026-10-27",
+        "c": "Investor",
+        "p": "Mervat",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Introduce Global Living",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891227894",
+        "w": "2026-10-26",
+        "d": "2026-10-28",
+        "c": "Investor - City Tower",
+        "p": "Pascal",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891247149",
+        "w": "2026-10-26",
+        "d": "2026-10-30",
+        "c": "Aldar",
+        "p": "Stan Elenor Glynn",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891205129",
+        "w": "2026-10-26",
+        "d": "2026-10-28",
+        "c": "Lndmrk",
+        "p": "Conor Kilcoyne",
+        "co": "Other",
+        "t": "New client meeting",
+        "o": "Introduce Global Living",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891228680",
+        "w": "2026-10-26",
+        "d": "2026-10-27",
+        "c": "McCone",
+        "p": "Gareth Pierce",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2891209573",
+        "w": "2026-10-26",
+        "d": "2026-10-27",
+        "c": "Millhill",
+        "p": "Ajay Gokani",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
-      "thisWeek": "2026-10-19",
+      "thisWeek": "2026-10-26",
       "planTotal": 11,
       "planByType": [
         {
@@ -5616,11 +5759,11 @@
         },
         {
           "k": "Existing client meeting",
-          "v": 6
+          "v": 8
         },
         {
           "k": "New client meeting",
-          "v": 5
+          "v": 3
         },
         {
           "k": "Event",
@@ -5650,7 +5793,7 @@
         },
         {
           "k": "Deal progression",
-          "v": 5
+          "v": 0
         },
         {
           "k": "Proposals / Presentation",
@@ -5658,7 +5801,7 @@
         },
         {
           "k": "Proposals / Quotes Issuance",
-          "v": 3
+          "v": 0
         },
         {
           "k": "New lead created",
@@ -5673,9 +5816,9 @@
           "v": 0
         }
       ],
-      "lastWeek": "2026-10-05",
+      "lastWeek": "2026-10-19",
       "lastWeekTotalActual": 0,
-      "lastWeekTotalTarget": 9,
+      "lastWeekTotalTarget": 11,
       "lastWeekOutcomes": [
         {
           "k": "Introduce Global Living",
@@ -5697,9 +5840,9 @@
         },
         {
           "k": "Deal progression",
-          "t": 0,
+          "t": 5,
           "a": 0,
-          "v": 0
+          "v": -5
         },
         {
           "k": "Proposals / Presentation",
@@ -5709,9 +5852,9 @@
         },
         {
           "k": "Proposals / Quotes Issuance",
-          "t": 0,
+          "t": 3,
           "a": 0,
-          "v": 0
+          "v": -3
         },
         {
           "k": "New lead created",
