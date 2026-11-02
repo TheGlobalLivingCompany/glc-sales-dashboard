@@ -397,3 +397,10 @@
 - David Ives added 11 new entries for the week of October 19, primarily with Investor - City Tower (Investor/End client cohort) and also picked up activity with Betterhomes and Vogue (both Broker cohort) and a general Investor contact
 - David Ives updated Di Salvo Realty, classifying them as a Broker cohort, logging an existing client meeting focused on relationship advancement
 - Olle Kjellberg has no changes this week
+
+## 2026-11-02
+
+- David Ives added 11 new entries across multiple clients, bringing total from 431 to 442
+- Investor - City Tower (Investor/End client cohort) accounts for 5 of the new entries
+- New activity also includes Investor, Aldar (Developer), Lndmrk (Other), McCone (Investor/End client), and Millhill (Developer)
+- Olle Kjellberg has no changes this week
