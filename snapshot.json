@@ -5747,11 +5747,245 @@
         "e": null,
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2902994996",
+        "w": "2026-11-09",
+        "d": "2026-11-09",
+        "c": "Investor",
+        "p": "Abdulla Janahi",
+        "co": "Investor/End client",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903005233",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "Millhill",
+        "p": "Ajay Gokani",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903005237",
+        "w": "2026-11-09",
+        "d": "2026-11-09",
+        "c": "McCone",
+        "p": "Gareth Pierce",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903005638",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "Betterhomes",
+        "p": "Amanda Hourieh",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903005640",
+        "w": "2026-11-09",
+        "d": "2026-11-11",
+        "c": "Di Salvo Realty",
+        "p": "Juan Di Salvo",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2902991492",
+        "w": "2026-11-09",
+        "d": "2026-11-12",
+        "c": "Cityzen",
+        "p": "Kevin Willmasser",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903005310",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "H&H",
+        "p": "Sahali Saleem",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2902991497",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "H&H",
+        "p": "Dimple",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2902991531",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "H&H",
+        "p": "Elle Jamshidi",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903005612",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "Berkeley Homes",
+        "p": "Chris Frame",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903006663",
+        "w": "2026-11-09",
+        "d": "2026-11-12",
+        "c": "Arada London",
+        "p": "Daniele",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903006893",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "Ellington",
+        "p": "Manar",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2902992396",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "Dubai Buyers Club",
+        "p": "Elijah",
+        "co": "Broker",
+        "t": "New client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903006996",
+        "w": "2026-11-09",
+        "d": "2026-11-10",
+        "c": "Provident",
+        "p": "Adrienne",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903006721",
+        "w": "2026-11-09",
+        "d": "2026-11-13",
+        "c": "Haus & Haus",
+        "p": "Simon Baker",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2902992513",
+        "w": "2026-11-09",
+        "d": "2026-11-13",
+        "c": "Investor",
+        "p": "Ivonna",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2903025431",
+        "w": "2026-11-09",
+        "d": "2026-11-09",
+        "c": "Investor",
+        "p": "Yameena",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Introduce Global Living",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2902992560",
+        "w": "2026-11-09",
+        "d": "2026-11-09",
+        "c": "Investor - City Tower",
+        "p": "Mikhail",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Introduce Global Living",
+        "e": null,
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
-      "thisWeek": "2026-10-26",
-      "planTotal": 11,
+      "thisWeek": "2026-11-09",
+      "planTotal": 18,
       "planByType": [
         {
           "k": "Intro / first meeting",
@@ -5759,11 +5993,11 @@
         },
         {
           "k": "Existing client meeting",
-          "v": 8
+          "v": 14
         },
         {
           "k": "New client meeting",
-          "v": 3
+          "v": 4
         },
         {
           "k": "Event",
@@ -5816,7 +6050,7 @@
           "v": 0
         }
       ],
-      "lastWeek": "2026-10-19",
+      "lastWeek": "2026-10-26",
       "lastWeekTotalActual": 0,
       "lastWeekTotalTarget": 11,
       "lastWeekOutcomes": [
@@ -5840,9 +6074,9 @@
         },
         {
           "k": "Deal progression",
-          "t": 5,
+          "t": 0,
           "a": 0,
-          "v": -5
+          "v": 0
         },
         {
           "k": "Proposals / Presentation",
@@ -5852,9 +6086,9 @@
         },
         {
           "k": "Proposals / Quotes Issuance",
-          "t": 3,
+          "t": 0,
           "a": 0,
-          "v": -3
+          "v": 0
         },
         {
           "k": "New lead created",
