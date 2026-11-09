@@ -404,3 +404,12 @@
 - Investor - City Tower (Investor/End client cohort) accounts for 5 of the new entries
 - New activity also includes Investor, Aldar (Developer), Lndmrk (Other), McCone (Investor/End client), and Millhill (Developer)
 - Olle Kjellberg has no changes this week
+
+## 2026-11-09
+
+- David Ives added 18 new entries across the week of November 9, bringing total from 442 to 460
+- New broker clients added: McCone, Betterhomes, Di Salvo Realty, Cityzone, Dubai Buyers Club, Provident, and Haus & Haus
+- H&H (Broker) added three times in the same week
+- Developer cohort expanded with Millhill, Berkeley Homes, Arada London, and Ellington
+- Investor/End client cohort grew with multiple Investor entries and Investor - City Tower
+- Olle Kjellberg: no changes this week
