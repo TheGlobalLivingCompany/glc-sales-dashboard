@@ -5981,11 +5981,167 @@
         "e": null,
         "a": null,
         "n": ""
+      },
+      {
+        "id": "2908685001",
+        "w": "2026-11-16",
+        "d": "2026-11-16",
+        "c": "Intent",
+        "p": "Christian Ciraolo",
+        "co": "Other",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908685053",
+        "w": "2026-11-16",
+        "d": "2026-11-16",
+        "c": null,
+        "p": "Reza Zafari",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908685012",
+        "w": "2026-11-16",
+        "d": "2026-11-17",
+        "c": "Lotus Living",
+        "p": "Rajiv Nehru",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908698799",
+        "w": "2026-11-16",
+        "d": "2026-11-17",
+        "c": "H&H",
+        "p": "Dimple",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908685014",
+        "w": "2026-11-16",
+        "d": "2026-11-17",
+        "c": "Investor - City Tower",
+        "p": "Ahmed Atalah",
+        "co": "Developer",
+        "t": "New client meeting",
+        "o": "Introduce Global Living",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908685213",
+        "w": "2026-11-16",
+        "d": "2026-11-16",
+        "c": "Investor - City Tower",
+        "p": "Aashay",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908698803",
+        "w": "2026-11-16",
+        "d": "2026-11-16",
+        "c": "Investor",
+        "p": "Hashmia",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908698806",
+        "w": "2026-11-16",
+        "d": "2026-11-16",
+        "c": "Investor - Allegro",
+        "p": "Ivona",
+        "co": "Investor/End client",
+        "t": "New client meeting",
+        "o": "Deal progression",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908685219",
+        "w": "2026-11-16",
+        "d": "2026-11-18",
+        "c": "Lux Vant",
+        "p": "Mariam",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908685255",
+        "w": "2026-11-16",
+        "d": "2026-11-16",
+        "c": "Arada",
+        "p": "Danielle Appiasei",
+        "co": "Developer",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908700986",
+        "w": "2026-11-16",
+        "d": "2026-11-21",
+        "c": "Knight Frank",
+        "p": "Rupert Simmons",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
+      },
+      {
+        "id": "2908701067",
+        "w": "2026-11-16",
+        "d": "2026-11-21",
+        "c": "Knight Frank",
+        "p": "louis Harding",
+        "co": "Broker",
+        "t": "Existing client meeting",
+        "o": "Relationship advance",
+        "e": null,
+        "a": null,
+        "n": ""
       }
     ],
     "dashboard": {
-      "thisWeek": "2026-11-09",
-      "planTotal": 18,
+      "thisWeek": "2026-11-16",
+      "planTotal": 12,
       "planByType": [
         {
           "k": "Intro / first meeting",
@@ -5993,7 +6149,7 @@
         },
         {
           "k": "Existing client meeting",
-          "v": 14
+          "v": 8
         },
         {
           "k": "New client meeting",
@@ -6050,9 +6206,9 @@
           "v": 0
         }
       ],
-      "lastWeek": "2026-10-26",
+      "lastWeek": "2026-11-09",
       "lastWeekTotalActual": 0,
-      "lastWeekTotalTarget": 11,
+      "lastWeekTotalTarget": 18,
       "lastWeekOutcomes": [
         {
           "k": "Introduce Global Living",
