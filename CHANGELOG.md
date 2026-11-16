@@ -413,3 +413,12 @@
 - Developer cohort expanded with Millhill, Berkeley Homes, Arada London, and Ellington
 - Investor/End client cohort grew with multiple Investor entries and Investor - City Tower
 - Olle Kjellberg: no changes this week
+
+## 2026-11-16
+
+- David Ives added 12 new line items this week, bringing total from 460 to 472
+- New Developer cohort entries added for Lotus Living, H&H, and Arada
+- Investor/End client cohort expanded with entries for Investor - City Tower, Investor, and Investor - Allegro
+- Broker cohort now includes Lux Vant and Knight Frank (two entries)
+- Intent and one unnamed Broker entry also added
+- Olle Kjellberg has no changes this week
